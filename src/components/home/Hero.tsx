@@ -38,11 +38,15 @@ export default function Hero() {
           </h1>
 
           <p className="animate-fade-up delay-200 mx-auto md:mx-0 mt-6 max-w-xl text-base leading-relaxed text-ink-soft sm:text-lg">
-            Digitalne pozivnice koje izgledaju moderno, dele se lako i pomažu
-            gostima da potvrde dolazak bez zvanja i poruka.
+            Sve informacije na jednom mestu — manje zvanja gostiju, lakše
+            organizovanje i potvrda dolaska bez poruka napred-nazad.
           </p>
 
-          <p className="animate-fade-up delay-200 mt-4 text-[13px] tracking-wide text-ink">
+          <p className="animate-fade-up delay-200 mt-4 mx-auto md:mx-0 max-w-md text-[13px] italic leading-relaxed text-ink-soft">
+            Manje stresa oko organizacije, više vremena da uživaš u svom danu.
+          </p>
+
+          <p className="animate-fade-up delay-200 mt-5 text-[13px] tracking-wide text-ink">
             <span className="text-gold">●</span> Gotovo za 24–48h
             <span className="mx-2 text-gold/60">•</span>
             Bez komplikacija

@@ -18,7 +18,7 @@ export default function MidCTA() {
             href="#kontakt"
             className="group inline-flex items-center justify-center rounded-full bg-ink px-9 py-4 text-sm font-medium tracking-[0.12em] uppercase text-ivory shadow-[0_15px_40px_-15px_rgba(42,35,32,0.7)] transition-all hover:-translate-y-0.5 hover:shadow-[0_20px_50px_-15px_rgba(42,35,32,0.7)]"
           >
-            Javi se za svoju
+            Započni svoju pozivnicu
             <span className="ml-3 transition-transform group-hover:translate-x-0.5">
               →
             </span>

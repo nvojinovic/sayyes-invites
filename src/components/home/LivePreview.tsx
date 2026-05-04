@@ -43,7 +43,7 @@ export default function LivePreview() {
           </h2>
 
           <p className="mx-auto mt-4 max-w-md text-base leading-relaxed text-ink-soft">
-            Interaktivni primer pozivnice za par Ivana &amp; Dimitrije.
+            Klikni i vidi kako bi tvoja pozivnica izgledala.
           </p>
         </div>
 
@@ -112,13 +112,13 @@ export default function LivePreview() {
             >
               <span className="absolute inset-0 rounded-full ring-1 ring-gold/50" />
               <span className="absolute inset-0 rounded-full ring-2 ring-gold/0 transition-all group-hover:ring-gold/40 group-hover:ring-offset-2 group-hover:ring-offset-ivory" />
-              Otvori demo
+              Isprobaj demo
               <span className="ml-3 transition-transform group-hover:translate-x-1">
                 →
               </span>
             </a>
             <p className="text-[11px] uppercase tracking-[0.3em] text-ink-soft">
-              Otvara se u istom prozoru
+              Otvori za 2 sekunde
             </p>
           </div>
         </div>

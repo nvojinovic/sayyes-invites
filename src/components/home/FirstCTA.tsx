@@ -13,30 +13,41 @@ export default function FirstCTA() {
         <div className="mx-auto mb-6 h-px w-12 bg-gold/60" />
 
         <h2 className="font-serif text-3xl leading-tight text-ink sm:text-4xl md:text-5xl">
-          Želiš ovakvu
-          <span className="italic text-gold"> pozivnicu</span>?
+          Spreman da tvoje venčanje
+          <br className="hidden sm:block" />
+          počne
+          <span className="italic text-gold"> drugačije</span>?
         </h2>
 
         <p className="mx-auto mt-5 max-w-md text-base leading-relaxed text-ink-soft sm:text-lg">
-          Pošalji nam poruku i napravićemo pozivnicu po meri vašeg dana.
+          Pošalji nam poruku i za 24–48h imaš pozivnicu koja radi sve
+          umesto tebe.
         </p>
 
         <div className="mt-10 flex justify-center">
           <a
-            href="#kontakt-forma"
-            className="group relative inline-flex items-center justify-center rounded-full bg-ink px-9 py-4 text-sm font-medium tracking-[0.12em] uppercase text-ivory shadow-[0_15px_40px_-15px_rgba(42,35,32,0.7)] transition-all hover:-translate-y-0.5 hover:shadow-[0_20px_50px_-15px_rgba(42,35,32,0.7)]"
+            href="mailto:hello@sayyesinvites.com"
+            className="group relative inline-flex items-center justify-center rounded-full bg-ink px-10 py-4 text-sm font-medium tracking-[0.12em] uppercase text-ivory shadow-[0_15px_40px_-15px_rgba(42,35,32,0.7)] transition-all duration-200 hover:-translate-y-0.5 hover:shadow-[0_22px_55px_-15px_rgba(42,35,32,0.8)] active:scale-[0.98]"
           >
-            <span className="absolute inset-0 rounded-full ring-1 ring-gold/40 transition-opacity opacity-0 group-hover:opacity-100" />
-            Javi se za detalje
-            <span className="ml-3 transition-transform group-hover:translate-x-0.5">
-              →
-            </span>
+            <span className="absolute inset-0 rounded-full ring-1 ring-gold/40 opacity-0 transition-opacity group-hover:opacity-100" />
+            Pošalji upit
+            <span className="ml-3 transition-transform group-hover:translate-x-0.5">→</span>
           </a>
         </div>
 
-        <p className="mt-8 text-[11px] uppercase tracking-[0.35em] text-ink-soft">
-          Bez obaveze · Odgovor u roku od 24h
-        </p>
+        {/* Urgency + trust */}
+        <div className="mt-8 flex flex-col items-center gap-2.5">
+          <p className="text-[11px] uppercase tracking-[0.35em] text-ink-soft">
+            Bez obaveze • Odgovor u roku od 24h
+          </p>
+          <div className="flex items-center gap-2">
+            <span className="h-1 w-1 rounded-full bg-gold" />
+            <p className="text-[11px] uppercase tracking-[0.3em] text-gold">
+              Radimo ograničen broj projekata mesečno da bismo zadržali kvalitet
+            </p>
+            <span className="h-1 w-1 rounded-full bg-gold" />
+          </div>
+        </div>
       </div>
     </section>
   );

@@ -1,7 +1,7 @@
 @import "tailwindcss";
 
 @theme {
-  /* Homepage palette */
+  /* ── Homepage palette ── */
   --font-serif: "Cormorant Garamond", "Playfair Display", Georgia, "Times New Roman", serif;
   --font-sans: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
 
@@ -15,7 +15,7 @@
   --color-ink-soft: #5a4f48;
   --color-rose: #e8d4cf;
 
-  /* Wedding customer site palette */
+  /* ── Wedding template palette (non-conflicting additions) ── */
   --color-cream: #FAF7F2;
   --color-beige: #E8DDD0;
   --color-sage-50: #F2F5EE;
@@ -59,7 +59,7 @@
 }
 
 @layer utilities {
-  /* Homepage utilities */
+  /* ── Homepage utilities ── */
   .font-serif {
     font-family: var(--font-serif);
   }
@@ -101,9 +101,9 @@
   .delay-300 { animation-delay: 0.3s; }
   .delay-500 { animation-delay: 0.5s; }
 
-  /* Wedding customer site utilities */
+  /* ── Wedding template utilities ── */
 
-  /* Font-family utility used by WeddingInvitation */
+  /* Replicates the Tailwind v3 font-family utility used by WeddingInvitation */
   .font-serif-display {
     font-family: "Playfair Display", "Cormorant Garamond", Georgia, serif;
     font-feature-settings: "liga", "dlig";
@@ -157,7 +157,7 @@
   .animate-floatY  { animation: floatY  6s ease-in-out infinite; }
   .animate-shimmer { animation: shimmer 3s ease-in-out infinite; }
 
-  /* Selection colour scoped to the wedding wrapper */
+  /* Selection colour — scoped to wedding wrapper via class */
   .wedding-root ::selection {
     background-color: rgba(168, 188, 143, 0.4);
     color: #283322;

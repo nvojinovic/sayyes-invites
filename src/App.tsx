@@ -1,18 +1,17 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-import HomePage from "./pages/HomePage";
-import IvanaDimitrijePage from "./pages/IvanaDimitrijePage";
-import WeddingPage from "./pages/WeddingPage";
+import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import Home from './pages/Home'
+import IvanaDimitrijeTemplate from './templates/ivana-dimitrije/index'
 
 function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<HomePage />} />
-        <Route path="/ivana-dimitrije" element={<IvanaDimitrijePage />} />
-        <Route path="/:slug" element={<WeddingPage />} />
+        <Route path="/" element={<Home />} />
+        <Route path="/ivana-dimitrije" element={<IvanaDimitrijeTemplate />} />
+        <Route path="/ivana-dimitrije/*" element={<IvanaDimitrijeTemplate />} />
       </Routes>
     </BrowserRouter>
-  );
+  )
 }
 
-export default App;
+export default App
