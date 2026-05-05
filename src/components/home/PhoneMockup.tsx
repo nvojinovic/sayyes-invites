@@ -3,10 +3,10 @@ const DEMO_URL = "/ivana-dimitrije";
 export default function PhoneMockup() {
   return (
     <div
-      className="relative mx-auto aspect-[9/19] w-[260px] animate-float-slow sm:w-[290px] md:w-[310px]"
+      className="relative mx-auto aspect-[9/19] w-[218px] animate-float-slow transform-gpu sm:w-[290px] md:w-[310px]"
       aria-hidden="true"
     >
-      <div className="absolute -inset-10 bg-[radial-gradient(closest-side,rgba(201,169,106,0.28),transparent_70%)] blur-2xl" />
+      <div className="absolute -inset-8 bg-[radial-gradient(closest-side,rgba(201,169,106,0.24),transparent_70%)] blur-2xl sm:-inset-10 sm:bg-[radial-gradient(closest-side,rgba(201,169,106,0.28),transparent_70%)]" />
 
       <div className="relative h-full w-full rounded-[44px] bg-gradient-to-b from-[#1a1714] to-[#0d0b09] p-[6px] shadow-[0_30px_80px_-20px_rgba(60,40,15,0.45),0_10px_30px_-12px_rgba(0,0,0,0.35)] ring-1 ring-black/30">
         <div className="absolute left-1/2 top-2 z-30 h-[22px] w-[92px] -translate-x-1/2 rounded-full bg-black" />

@@ -1,12 +1,12 @@
 export default function EmotionalIntro() {
   return (
-    <section className="relative overflow-hidden bg-ivory-deep py-24 sm:py-32">
+    <section className="relative overflow-hidden bg-ivory-deep py-16 sm:py-24 md:py-32">
       <div className="pointer-events-none absolute inset-0 opacity-60">
         <div className="absolute left-1/2 top-1/2 h-[480px] w-[480px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[radial-gradient(closest-side,rgba(201,169,106,0.18),transparent_70%)] blur-3xl" />
       </div>
 
-      <div className="relative mx-auto max-w-3xl px-6 text-center">
-        <div className="mx-auto mb-8 flex items-center justify-center gap-3">
+      <div className="relative mx-auto max-w-3xl px-5 text-center sm:px-6">
+        <div className="mx-auto mb-6 flex items-center justify-center gap-3 sm:mb-8">
           <span className="h-px w-10 bg-gold/50" />
           <span className="text-[11px] uppercase tracking-[0.4em] text-gold">
             Atmosfera
@@ -14,12 +14,12 @@ export default function EmotionalIntro() {
           <span className="h-px w-10 bg-gold/50" />
         </div>
 
-        <h2 className="font-serif text-3xl leading-[1.15] text-ink sm:text-4xl md:text-5xl">
+        <h2 className="font-serif text-[2rem] leading-[1.12] text-ink sm:text-4xl md:text-5xl">
           Pozivnica nije samo
           <span className="italic text-gold"> informacija</span>.
         </h2>
 
-        <p className="mx-auto mt-7 max-w-xl text-lg leading-relaxed text-ink-soft sm:text-xl">
+        <p className="mx-auto mt-5 max-w-xl text-base leading-7 text-ink-soft sm:mt-7 sm:text-xl sm:leading-relaxed">
           To je prvi trenutak kada gosti osete atmosferu vašeg dana.
         </p>
 

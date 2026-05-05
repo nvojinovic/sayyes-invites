@@ -65,13 +65,13 @@ export default function Pricing() {
   return (
     <section
       id="cene"
-      className="relative overflow-hidden bg-ivory-deep py-24 sm:py-32"
+      className="relative overflow-hidden bg-ivory-deep py-16 sm:py-24 md:py-32"
     >
       <div className="pointer-events-none absolute inset-0 -z-10">
         <div className="absolute left-1/2 top-0 h-[400px] w-[700px] -translate-x-1/2 rounded-full bg-[radial-gradient(closest-side,rgba(201,169,106,0.14),transparent_70%)] blur-3xl" />
       </div>
 
-      <div className="relative mx-auto max-w-5xl px-6">
+      <div className="relative mx-auto max-w-5xl px-5 sm:px-6">
         {/* Heading */}
         <div className="text-center">
           <div className="mx-auto mb-5 flex items-center justify-center gap-3">
@@ -82,25 +82,25 @@ export default function Pricing() {
             <span className="h-px w-10 bg-gold/50" />
           </div>
 
-          <h2 className="font-serif text-3xl leading-tight text-ink sm:text-4xl md:text-5xl">
+          <h2 className="font-serif text-[2rem] leading-[1.1] text-ink sm:text-4xl md:text-5xl">
             Jednostavne cene,
             <span className="italic text-gold"> bez iznenađenja</span>
           </h2>
 
-          <p className="mx-auto mt-4 max-w-md text-base leading-relaxed text-ink-soft">
+          <p className="mx-auto mt-4 max-w-md text-[15px] leading-7 text-ink-soft sm:text-base sm:leading-relaxed">
             Sve je uključeno — nema skrivenih troškova, nema pretplate.
           </p>
         </div>
 
         {/* Cards */}
-        <div className="mt-14 grid gap-5 sm:grid-cols-3 sm:items-stretch">
+        <div className="mt-10 grid gap-5 sm:mt-14 lg:grid-cols-3 lg:items-stretch">
           {PLANS.map((plan) => (
             <div
               key={plan.name}
               className={[
-                "relative flex flex-col rounded-2xl p-7 transition-all duration-300",
+                "relative flex flex-col rounded-2xl p-6 transition-all duration-300 sm:p-7",
                 plan.highlighted
-                  ? "bg-ink text-ivory shadow-[0_30px_70px_-25px_rgba(42,35,32,0.55)] ring-1 ring-gold/40 sm:scale-[1.04] sm:z-10 hover:-translate-y-1 hover:shadow-[0_36px_80px_-25px_rgba(42,35,32,0.7)]"
+                  ? "bg-ink text-ivory shadow-[0_30px_70px_-25px_rgba(42,35,32,0.55)] ring-1 ring-gold/40 lg:z-10 lg:scale-[1.04] hover:-translate-y-1 hover:shadow-[0_36px_80px_-25px_rgba(42,35,32,0.7)]"
                   : "bg-white/70 ring-1 ring-champagne/50 backdrop-blur-sm hover:-translate-y-1 hover:ring-gold/40 hover:shadow-[0_24px_55px_-20px_rgba(42,35,32,0.22)]",
               ].join(" ")}
             >
@@ -124,7 +124,7 @@ export default function Pricing() {
                 </p>
                 <p
                   className={[
-                    "mt-3 font-serif text-4xl",
+                    "mt-3 font-serif text-[2.35rem] leading-none sm:text-4xl",
                     plan.highlighted ? "text-ivory" : "text-ink",
                   ].join(" ")}
                 >
@@ -132,7 +132,7 @@ export default function Pricing() {
                 </p>
                 <p
                   className={[
-                    "mt-1.5 text-[12px]",
+                    "mt-2 text-[13px] leading-5",
                     plan.highlighted ? "text-ivory/60" : "text-ink-soft",
                   ].join(" ")}
                 >
@@ -149,7 +149,7 @@ export default function Pricing() {
               />
 
               {/* Features */}
-              <ul className="flex-1 space-y-3">
+              <ul className="flex-1 space-y-3.5">
                 {plan.features.map((f) => (
                   <li key={f} className="flex items-start gap-2.5">
                     {plan.highlighted ? (
@@ -175,7 +175,7 @@ export default function Pricing() {
                     )}
                     <span
                       className={[
-                        "text-[13px] leading-snug",
+                        "text-sm leading-6",
                         plan.highlighted ? "text-ivory/80" : "text-ink-soft",
                       ].join(" ")}
                     >
@@ -189,7 +189,7 @@ export default function Pricing() {
               <a
                 href="#kontakt"
                 className={[
-                  "mt-8 inline-flex items-center justify-center rounded-full py-3 text-[12px] font-medium uppercase tracking-[0.18em] transition-all duration-200 active:scale-[0.97]",
+                  "mt-8 inline-flex min-h-12 items-center justify-center rounded-full px-4 py-3.5 text-center text-[12px] font-medium uppercase tracking-[0.14em] transition-all duration-200 active:scale-[0.97] sm:tracking-[0.18em]",
                   plan.highlighted
                     ? "bg-gold text-ivory shadow-[0_8px_20px_-8px_rgba(180,138,74,0.7)] hover:-translate-y-0.5 hover:bg-gold-soft hover:shadow-[0_12px_28px_-8px_rgba(180,138,74,0.8)]"
                     : "border border-ink/15 bg-white/60 text-ink hover:-translate-y-0.5 hover:border-gold/50 hover:bg-white hover:shadow-[0_8px_20px_-8px_rgba(42,35,32,0.15)]",
@@ -202,7 +202,7 @@ export default function Pricing() {
           ))}
         </div>
 
-        <p className="mt-10 text-center text-[11px] uppercase tracking-[0.3em] text-ink-soft">
+        <p className="mx-auto mt-8 max-w-xs text-center text-[10px] uppercase leading-5 tracking-[0.24em] text-ink-soft sm:mt-10 sm:max-w-none sm:text-[11px] sm:tracking-[0.3em]">
           Cene su orijentacione · Finalna cena zavisi od zahteva
         </p>
       </div>

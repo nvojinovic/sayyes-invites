@@ -20,13 +20,13 @@ export default function HowItWorks() {
   return (
     <section
       id="kako-funkcionise"
-      className="relative overflow-hidden bg-ivory py-24 sm:py-32"
+      className="relative overflow-hidden bg-ivory py-16 sm:py-24 md:py-32"
     >
       <div className="pointer-events-none absolute inset-0 -z-10">
         <div className="absolute inset-0 bg-[radial-gradient(50%_40%_at_50%_0%,#fbf2e2_0%,#fbf7f1_70%,#fbf7f1_100%)]" />
       </div>
 
-      <div className="relative mx-auto max-w-5xl px-6">
+      <div className="relative mx-auto max-w-5xl px-5 sm:px-6">
         <div className="text-center">
           <div className="mx-auto mb-5 flex items-center justify-center gap-3">
             <span className="h-px w-10 bg-gold/50" />
@@ -36,28 +36,28 @@ export default function HowItWorks() {
             <span className="h-px w-10 bg-gold/50" />
           </div>
 
-          <h2 className="font-serif text-3xl leading-tight text-ink sm:text-4xl md:text-5xl">
+          <h2 className="font-serif text-[2rem] leading-[1.1] text-ink sm:text-4xl md:text-5xl">
             Tri jednostavna
             <span className="italic text-gold"> koraka</span>
           </h2>
 
-          <p className="mx-auto mt-4 max-w-md text-base leading-relaxed text-ink-soft">
+          <p className="mx-auto mt-4 max-w-md text-[15px] leading-7 text-ink-soft sm:text-base sm:leading-relaxed">
             Bez aplikacija, bez naloga — sve radimo umesto vas.
           </p>
         </div>
 
-        <ol className="mt-14 grid gap-6 sm:gap-8 md:grid-cols-3">
+        <ol className="mt-10 grid gap-4 sm:mt-14 sm:gap-6 md:grid-cols-3 md:gap-8">
           {STEPS.map((step, i) => (
             <li
               key={step.n}
-              className="group relative rounded-2xl bg-white/60 p-7 ring-1 ring-champagne/40 backdrop-blur-sm transition-all hover:-translate-y-1 hover:ring-gold/40 hover:shadow-[0_20px_50px_-25px_rgba(60,40,15,0.35)]"
+              className="group relative rounded-2xl bg-white/60 p-6 ring-1 ring-champagne/40 backdrop-blur-sm transition-all hover:-translate-y-1 hover:ring-gold/40 hover:shadow-[0_20px_50px_-25px_rgba(60,40,15,0.35)] sm:p-7"
             >
               <div className="flex items-baseline gap-3">
                 <span className="font-serif text-3xl text-gold">{step.n}</span>
                 <span className="h-px flex-1 bg-gold/30" />
               </div>
 
-              <h3 className="mt-5 font-serif text-xl leading-snug text-ink sm:text-2xl">
+              <h3 className="mt-4 font-serif text-xl leading-snug text-ink sm:mt-5 sm:text-2xl">
                 {step.title}
               </h3>
               <p className="mt-3 text-sm leading-relaxed text-ink-soft">
@@ -76,7 +76,7 @@ export default function HowItWorks() {
           ))}
         </ol>
 
-        <div className="mt-14 flex flex-col items-center gap-3">
+        <div className="mt-10 flex flex-col items-center gap-3 sm:mt-14">
           <a
             href="#kontakt"
             className="inline-flex items-center text-sm font-medium tracking-wide text-ink underline-offset-[6px] decoration-gold/50 hover:decoration-gold transition-all"

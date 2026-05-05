@@ -162,4 +162,25 @@
     background-color: rgba(168, 188, 143, 0.4);
     color: #283322;
   }
+
+  @media (max-width: 640px) {
+    .animate-float-slow {
+      animation: none;
+    }
+
+    .animate-fade-up,
+    .animate-fade-in {
+      animation-duration: 0.45s;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .animate-fade-up,
+    .animate-fade-in,
+    .animate-float-slow,
+    .animate-floatY,
+    .animate-shimmer {
+      animation: none;
+    }
+  }
 }
