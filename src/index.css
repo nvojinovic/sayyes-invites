@@ -39,6 +39,8 @@
 @layer base {
   html {
     scroll-behavior: smooth;
+    scroll-padding-top: 72px;
+    -webkit-text-size-adjust: 100%;
   }
 
   body {
@@ -49,6 +51,13 @@
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     text-rendering: optimizeLegibility;
+    -webkit-tap-highlight-color: transparent;
+    overscroll-behavior-y: none;
+  }
+
+  /* Prevent iOS Safari from zooming on input focus */
+  input, select, textarea {
+    font-size: 16px;
   }
 
   h1, h2, h3 {
