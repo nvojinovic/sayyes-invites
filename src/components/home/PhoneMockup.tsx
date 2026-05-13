@@ -58,7 +58,7 @@ export default function PhoneMockup() {
     <motion.div
       ref={parallaxRef}
       style={{ y, scale }}
-      className="will-change-transform"
+      className="relative will-change-transform"
     >
       <div
         ref={containerRef}
@@ -78,7 +78,7 @@ export default function PhoneMockup() {
               src="/ivana-dimitrije?preview=true"
               title="Demo pozivnica — Ivana & Dimitrije"
               tabIndex={-1}
-              loading="lazy"
+              loading="eager"
               className="phone-iframe"
             />
           </div>

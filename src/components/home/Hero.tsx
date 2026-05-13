@@ -66,21 +66,11 @@ export default function Hero() {
           </h1>
 
           <p className="animate-fade-up delay-200 mx-auto mt-5 max-w-xl text-[15px] leading-7 text-ink-soft sm:text-lg sm:leading-relaxed md:mx-0 md:mt-6">
-            Sve informacije na jednom mestu — manje zvanja gostiju, lakše
-            organizovanje i potvrda dolaska bez poruka napred-nazad.
+            Elegantna pozivnica sa svim informacijama, mapom i potvrdom dolaska
+            — spremna za slanje gostima za 24–48h.
           </p>
 
-          <p className="animate-fade-up delay-200 mt-4 mx-auto md:mx-0 max-w-md text-[13px] italic leading-relaxed text-ink-soft">
-            Manje stresa oko organizacije, više vremena da uživaš u svom danu.
-          </p>
-
-          <p className="animate-fade-up delay-200 mt-5 text-[12px] leading-6 tracking-wide text-ink sm:text-[13px]">
-            <span className="text-gold">●</span> Gotovo za 24–48h
-            <span className="mx-2 text-gold/60">•</span>
-            Bez komplikacija
-          </p>
-
-          <div className="animate-fade-up delay-300 mt-7 flex flex-col items-stretch gap-3 sm:flex-row sm:items-center sm:justify-center md:justify-start">
+          <div className="animate-fade-up delay-300 mt-8 flex flex-col items-stretch gap-3 sm:flex-row sm:items-center sm:justify-center md:justify-start">
             <a
               href="#templates"
               className="group inline-flex min-h-12 items-center justify-center rounded-full bg-ink px-7 py-3.5 text-sm font-medium tracking-wide text-ivory shadow-[0_10px_30px_-12px_rgba(42,35,32,0.55)] transition-all hover:-translate-y-0.5 hover:shadow-[0_18px_40px_-12px_rgba(42,35,32,0.55)]"
@@ -96,27 +86,9 @@ export default function Hero() {
             </a>
           </div>
 
-          <p className="animate-fade-in delay-500 mt-4 text-center md:text-left text-[12px] tracking-wide text-ink-soft">
-            Bez obaveze • Odgovor u roku od 24h
+          <p className="mt-5 text-center text-[13px] leading-6 text-ink-soft sm:text-sm md:text-left">
+            Bez aplikacije · bez komplikacija · odgovor u roku od 24h.
           </p>
-
-          <div className="animate-fade-in delay-500 mt-7 flex items-center justify-center gap-3 md:justify-start">
-            <svg
-              width="14"
-              height="14"
-              viewBox="0 0 14 14"
-              className="text-gold"
-              aria-hidden="true"
-            >
-              <path
-                d="M7 1l1.7 3.9L13 5.5l-3.2 2.9.9 4.3L7 10.5 3.3 12.7l.9-4.3L1 5.5l4.3-.6L7 1z"
-                fill="currentColor"
-              />
-            </svg>
-            <p className="max-w-[16rem] text-[10px] uppercase leading-5 tracking-[0.24em] text-ink-soft sm:max-w-none sm:text-[11px] sm:tracking-[0.3em]">
-              Već korišćeno za stvarna venčanja
-            </p>
-          </div>
         </div>
 
         <div className="animate-fade-up delay-200 relative mt-1 sm:mt-0">
