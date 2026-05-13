@@ -4,7 +4,7 @@ export default function Hero() {
   return (
     <section
       id="hero"
-      className="relative grain overflow-hidden pt-20 pb-16 sm:pt-24 sm:pb-28 md:pt-28 md:pb-32"
+      className="relative grain overflow-hidden pt-16 pb-16 sm:pt-24 sm:pb-28 md:pt-28 md:pb-32"
     >
       <div className="pointer-events-none absolute inset-0 -z-10">
         <div className="absolute inset-0 bg-[radial-gradient(80%_60%_at_50%_0%,#fbf2e2_0%,#fbf7f1_45%,#f5eee2_100%)]" />
@@ -12,61 +12,108 @@ export default function Hero() {
         <div className="absolute bottom-0 right-0 h-[360px] w-[360px] translate-x-1/3 translate-y-1/3 rounded-full bg-[radial-gradient(closest-side,rgba(232,212,207,0.45),transparent_70%)] blur-3xl" />
       </div>
 
-      <nav className="absolute inset-x-0 top-0 z-10 flex items-center justify-between px-6 py-5 sm:px-10">
-        <a href="/" className="font-serif text-xl tracking-wide text-ink">
+      <nav className="absolute inset-x-0 top-0 z-10 flex items-center justify-between gap-4 px-5 py-4 sm:px-10 sm:py-5">
+        <a href="/" className="shrink-0 font-serif text-lg tracking-wide text-ink sm:text-xl">
           SayYes<span className="text-gold">.</span>
         </a>
+        <div className="hidden items-center gap-6 sm:flex">
+          <a
+            href="#templates"
+            className="text-xs uppercase tracking-[0.25em] text-ink-soft hover:text-ink transition-colors"
+          >
+            Stilovi
+          </a>
+          <a
+            href="#kako-funkcionise"
+            className="text-xs uppercase tracking-[0.25em] text-ink-soft hover:text-ink transition-colors"
+          >
+            Kako funkcioniše
+          </a>
+          <a
+            href="#kontakt"
+            className="rounded-full border border-ink/20 bg-white/40 px-4 py-2 text-xs font-medium uppercase tracking-[0.18em] text-ink backdrop-blur-sm transition-all hover:border-gold/50 hover:bg-white/70"
+          >
+            Kontakt
+          </a>
+        </div>
+
+        {/* Mobile-only compact CTA */}
         <a
           href="#kontakt"
-          className="hidden text-xs uppercase tracking-[0.25em] text-ink-soft transition-colors hover:text-ink sm:inline-block"
+          className="rounded-full border border-ink/15 bg-white/60 px-3.5 py-1.5 text-[11px] font-medium uppercase tracking-[0.16em] text-ink backdrop-blur-sm active:scale-95 transition-transform sm:hidden"
         >
-          Zatraži pozivnicu
+          Kontakt
         </a>
       </nav>
 
-      <div className="relative mx-auto grid max-w-6xl grid-cols-1 items-center gap-9 px-6 sm:px-10 md:grid-cols-2 md:gap-10">
+      <div className="relative mx-auto grid max-w-6xl grid-cols-1 items-center gap-10 px-5 sm:gap-14 sm:px-10 md:grid-cols-2 md:gap-10">
         <div className="text-center md:text-left">
-          <p className="animate-reveal-blur text-[10px] uppercase tracking-[0.32em] text-gold sm:text-[11px] sm:tracking-[0.4em]">
+          <p className="animate-fade-in text-[10px] uppercase tracking-[0.32em] text-gold sm:text-[11px] sm:tracking-[0.4em]">
             Digitalne pozivnice za venčanje
           </p>
 
-          <h1 className="animate-reveal-blur delay-100 mx-auto mt-4 max-w-[23rem] font-serif text-[2.75rem] leading-[0.98] text-ink sm:max-w-none sm:text-6xl md:mx-0 md:text-[4rem] lg:text-7xl">
-            Jedan link.
+          <h1 className="animate-fade-up delay-100 mx-auto mt-4 max-w-[21rem] font-serif text-[2.35rem] leading-[1.06] text-ink sm:max-w-none sm:text-5xl md:mx-0 md:text-[3.6rem] lg:text-6xl">
+            Prvi utisak tvog
             <br className="hidden sm:block" />
-            <span className="italic text-gold"> Ceo doživljaj.</span>
+            <span className="italic text-gold"> venčanja </span>
+            počinje<br className="hidden sm:block" /> jednim linkom.
           </h1>
 
-          <p className="animate-reveal-blur delay-200 mx-auto mt-5 max-w-lg text-lg leading-8 text-ink-soft sm:text-xl sm:leading-9 md:mx-0 md:mt-6">
-            Premium digitalna pozivnica sa informacijama, mapom i potvrdom dolaska.
+          <p className="animate-fade-up delay-200 mx-auto mt-5 max-w-xl text-[15px] leading-7 text-ink-soft sm:text-lg sm:leading-relaxed md:mx-0 md:mt-6">
+            Sve informacije na jednom mestu — manje zvanja gostiju, lakše
+            organizovanje i potvrda dolaska bez poruka napred-nazad.
           </p>
 
-          <div className="animate-reveal-blur delay-300 mt-7 flex flex-col items-stretch gap-3 sm:flex-row sm:items-center sm:justify-center md:justify-start">
+          <p className="animate-fade-up delay-200 mt-4 mx-auto md:mx-0 max-w-md text-[13px] italic leading-relaxed text-ink-soft">
+            Manje stresa oko organizacije, više vremena da uživaš u svom danu.
+          </p>
+
+          <p className="animate-fade-up delay-200 mt-5 text-[12px] leading-6 tracking-wide text-ink sm:text-[13px]">
+            <span className="text-gold">●</span> Gotovo za 24–48h
+            <span className="mx-2 text-gold/60">•</span>
+            Bez komplikacija
+          </p>
+
+          <div className="animate-fade-up delay-300 mt-7 flex flex-col items-stretch gap-3 sm:flex-row sm:items-center sm:justify-center md:justify-start">
             <a
-              href="#kontakt"
-              className="group inline-flex min-h-[3.25rem] items-center justify-center rounded-full bg-ink px-8 py-4 text-sm font-medium tracking-wide text-ivory shadow-[0_18px_45px_-18px_rgba(42,35,32,0.75)] transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_24px_60px_-18px_rgba(42,35,32,0.75)]"
+              href="#templates"
+              className="group inline-flex min-h-12 items-center justify-center rounded-full bg-ink px-7 py-3.5 text-sm font-medium tracking-wide text-ivory shadow-[0_10px_30px_-12px_rgba(42,35,32,0.55)] transition-all hover:-translate-y-0.5 hover:shadow-[0_18px_40px_-12px_rgba(42,35,32,0.55)]"
             >
-              Zatraži svoju pozivnicu
+              Pogledaj stilove
               <span className="ml-2 transition-transform group-hover:translate-x-0.5">→</span>
             </a>
             <a
-              href="/ivana-dimitrije"
-              className="inline-flex min-h-[3.25rem] items-center justify-center rounded-full border border-ink/15 bg-white/50 px-8 py-4 text-sm font-medium tracking-wide text-ink backdrop-blur-sm transition-all duration-300 hover:border-gold/60 hover:bg-white/80"
+              href="#kontakt"
+              className="inline-flex min-h-12 items-center justify-center rounded-full border border-ink/15 bg-white/40 px-7 py-3.5 text-sm font-medium tracking-wide text-ink backdrop-blur-sm transition-all hover:border-gold/60 hover:bg-white/70"
             >
-              Isprobaj demo
+              Javi se za svoju
             </a>
           </div>
 
-          <div className="animate-reveal-blur delay-500 mx-auto mt-8 grid max-w-md grid-cols-3 overflow-hidden rounded-[1.75rem] border border-champagne/70 bg-white/45 text-center backdrop-blur-md md:mx-0">
-            {["Pošalješ podatke", "Mi napravimo", "Gosti otvore"].map((item) => (
-              <div key={item} className="border-r border-champagne/60 px-3 py-3 last:border-r-0">
-                <p className="text-[11px] leading-4 text-ink">{item}</p>
-              </div>
-            ))}
+          <p className="animate-fade-in delay-500 mt-4 text-center md:text-left text-[12px] tracking-wide text-ink-soft">
+            Bez obaveze • Odgovor u roku od 24h
+          </p>
+
+          <div className="animate-fade-in delay-500 mt-7 flex items-center justify-center gap-3 md:justify-start">
+            <svg
+              width="14"
+              height="14"
+              viewBox="0 0 14 14"
+              className="text-gold"
+              aria-hidden="true"
+            >
+              <path
+                d="M7 1l1.7 3.9L13 5.5l-3.2 2.9.9 4.3L7 10.5 3.3 12.7l.9-4.3L1 5.5l4.3-.6L7 1z"
+                fill="currentColor"
+              />
+            </svg>
+            <p className="max-w-[16rem] text-[10px] uppercase leading-5 tracking-[0.24em] text-ink-soft sm:max-w-none sm:text-[11px] sm:tracking-[0.3em]">
+              Već korišćeno za stvarna venčanja
+            </p>
           </div>
         </div>
 
-        {/* phone — hidden on mobile where it would push CTAs below fold */}
-        <div className="animate-fade-up delay-200 relative -mt-1 hidden md:block sm:mt-0">
+        <div className="animate-fade-up delay-200 relative mt-1 sm:mt-0">
           <PhoneMockup />
         </div>
       </div>
