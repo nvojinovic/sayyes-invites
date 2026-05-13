@@ -30,6 +30,12 @@ export default function Hero() {
             Kako funkcioniše
           </a>
           <a
+            href="#cene"
+            className="text-xs uppercase tracking-[0.25em] text-ink-soft hover:text-ink transition-colors"
+          >
+            Cene
+          </a>
+          <a
             href="#kontakt"
             className="rounded-full border border-ink/20 bg-white/40 px-4 py-2 text-xs font-medium uppercase tracking-[0.18em] text-ink backdrop-blur-sm transition-all hover:border-gold/50 hover:bg-white/70"
           >

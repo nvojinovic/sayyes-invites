@@ -1,3 +1,6 @@
+import { motion } from "framer-motion";
+import { useRevealVariants, VIEWPORT_ONCE } from "./_motion";
+
 const PLANS = [
   {
     name: "Standard",
@@ -53,6 +56,8 @@ function Check() {
 }
 
 export default function Pricing() {
+  const { fadeUpBlur, fadeUp, container } = useRevealVariants();
+
   return (
     <section
       id="cene"
@@ -63,19 +68,40 @@ export default function Pricing() {
       </div>
 
       <div className="relative mx-auto max-w-5xl px-6">
-        <div className="mx-auto max-w-3xl text-center">
-          <h2 className="font-serif text-[2.5rem] leading-[1.02] text-ink sm:text-5xl md:text-6xl">
+        <motion.div
+          variants={container({ stagger: 0.12 })}
+          initial="hidden"
+          whileInView="show"
+          viewport={VIEWPORT_ONCE}
+          className="mx-auto max-w-3xl text-center"
+        >
+          <motion.h2
+            variants={fadeUpBlur}
+            className="font-serif text-[2.5rem] leading-[1.02] text-ink sm:text-5xl md:text-6xl"
+          >
             Premium pozivnica,
             <span className="italic text-gold"> jasna cena</span>
-          </h2>
+          </motion.h2>
 
-          <p className="mx-auto mt-5 max-w-md text-lg leading-8 text-ink-soft">Bez pretplate. Bez skrivenih troškova.</p>
-        </div>
+          <motion.p
+            variants={fadeUp}
+            className="mx-auto mt-5 max-w-md text-lg leading-8 text-ink-soft"
+          >
+            Bez pretplate. Bez skrivenih troškova.
+          </motion.p>
+        </motion.div>
 
-        <div className="mt-12 mx-auto grid max-w-2xl gap-5 sm:grid-cols-2 sm:items-stretch">
+        <motion.div
+          variants={container({ stagger: 0.18, delay: 0.1 })}
+          initial="hidden"
+          whileInView="show"
+          viewport={VIEWPORT_ONCE}
+          className="mt-12 mx-auto grid max-w-2xl gap-5 sm:grid-cols-2 sm:items-stretch"
+        >
           {PLANS.map((plan) => (
-            <div
+            <motion.div
               key={plan.name}
+              variants={fadeUp}
               className={[
                 "relative flex flex-col rounded-[2rem] p-7 transition-all duration-500",
                 plan.highlighted
@@ -173,13 +199,19 @@ export default function Pricing() {
                 {plan.cta}
                 <span className="ml-2 text-[13px]">→</span>
               </a>
-            </div>
+            </motion.div>
           ))}
-        </div>
+        </motion.div>
 
-        <p className="mt-10 text-center text-sm text-ink-soft">
+        <motion.p
+          variants={fadeUp}
+          initial="hidden"
+          whileInView="show"
+          viewport={VIEWPORT_ONCE}
+          className="mt-10 text-center text-sm text-ink-soft"
+        >
           Finalna cena zavisi od obima i detalja pozivnice.
-        </p>
+        </motion.p>
       </div>
     </section>
   );
