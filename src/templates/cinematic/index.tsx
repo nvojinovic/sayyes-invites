@@ -5,7 +5,7 @@
 
 import { useState, useEffect, useRef } from "react";
 import { motion, useScroll, useTransform, AnimatePresence, useInView } from "framer-motion";
-import { MapPin, Clock, Check, X, Heart, ChevronDown } from "lucide-react";
+import { MapPin, Clock, Check, X, ChevronDown } from "lucide-react";
 
 const HERO_PHOTO =
   "https://images.unsplash.com/photo-1522673607200-164d1b6ce486?auto=format&fit=crop&w=1920&q=80";

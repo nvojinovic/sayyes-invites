@@ -6,7 +6,7 @@
 
 import { useState, useRef } from "react";
 import { motion, AnimatePresence, useInView } from "framer-motion";
-import { MapPin, Check, X, Heart } from "lucide-react";
+import { MapPin, Check, X } from "lucide-react";
 
 const COVER_PHOTO =
   "https://images.unsplash.com/photo-1606216794074-735e91aa2c92?auto=format&fit=crop&w=1200&q=80";
