@@ -201,9 +201,12 @@
     height: 844px;
     border: none;
     display: block;
-    transform: scale(0.713);
+    transform: scale(0.513);
     transform-origin: top left;
     pointer-events: none;
+  }
+  @media (min-width: 640px) {
+    .phone-iframe { transform: scale(0.713); }
   }
   @media (min-width: 768px) {
     .phone-iframe { transform: scale(0.764); }
