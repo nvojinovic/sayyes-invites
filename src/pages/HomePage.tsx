@@ -11,10 +11,10 @@ export default function HomePage() {
     <main className="min-h-screen overflow-x-hidden bg-ivory text-ink">
       <Hero />
       <PainReminder />
-      <HowItWorks />
       <LivePreview />
-      <Pricing />
       <TrustBar />
+      <HowItWorks />
+      <Pricing />
       <FirstCTA />
     </main>
   );

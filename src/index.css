@@ -186,6 +186,20 @@
   .animate-floatY  { animation: floatY  6s ease-in-out infinite; }
   .animate-shimmer { animation: shimmer 3s ease-in-out infinite; }
 
+  /* Phone mockup — scales 390px invitation into the phone shell */
+  .phone-iframe {
+    width: 390px;
+    height: 844px;
+    border: none;
+    display: block;
+    transform: scale(0.713);
+    transform-origin: top left;
+    pointer-events: none;
+  }
+  @media (min-width: 768px) {
+    .phone-iframe { transform: scale(0.764); }
+  }
+
   /* Selection colour — scoped to wedding wrapper via class */
   .wedding-root ::selection {
     background-color: rgba(168, 188, 143, 0.4);

@@ -11,10 +11,10 @@ export default function Home() {
     <main className="min-h-screen bg-ivory text-ink overflow-x-hidden">
       <Hero />
       <PainReminder />
-      <HowItWorks />
       <LivePreview />
-      <Pricing />
       <TrustBar />
+      <HowItWorks />
+      <Pricing />
       <FirstCTA />
     </main>
   );

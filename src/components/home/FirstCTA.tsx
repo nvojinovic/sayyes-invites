@@ -18,10 +18,15 @@ export default function FirstCTA() {
         </h2>
 
         <p className="mx-auto mt-6 max-w-md text-xl leading-8 text-ink-soft">
-          Počni od jedne poruke.
+          Počni od jedne poruke. Za 24–48h imaš gotov link.
         </p>
 
-        <div className="mt-10 flex justify-center">
+        {/* urgency — shown above the button */}
+        <p className="mt-8 text-[11px] uppercase tracking-[0.3em] text-gold">
+          ◆ &nbsp;Mesečno radimo sa ograničenim brojem parova&nbsp; ◆
+        </p>
+
+        <div className="mt-4 flex justify-center">
           <a
             href="mailto:hello@sayyesinvites.com"
             className="group relative inline-flex min-h-[3.25rem] w-full max-w-sm items-center justify-center rounded-full bg-ink px-8 py-4 text-sm font-medium uppercase tracking-[0.1em] text-ivory shadow-[0_22px_60px_-22px_rgba(42,35,32,0.8)] transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_28px_80px_-22px_rgba(42,35,32,0.9)] active:scale-[0.98] sm:w-auto sm:px-10 sm:tracking-[0.12em]"
@@ -32,7 +37,26 @@ export default function FirstCTA() {
           </a>
         </div>
 
-        <p className="mt-6 text-sm text-ink-soft">Odgovor u roku od 24h.</p>
+        <p className="mt-5 text-sm text-ink-soft">Bez obaveze · Odgovor u roku od 24h.</p>
+
+        {/* what happens next */}
+        <div className="mx-auto mt-10 max-w-sm rounded-[1.75rem] bg-white/60 px-6 py-5 ring-1 ring-champagne/50 text-left backdrop-blur-sm">
+          <p className="mb-4 text-[10px] uppercase tracking-[0.35em] text-gold">Šta se dešava posle</p>
+          <ol className="space-y-3">
+            {[
+              "Šalješ nam informacije o venčanju",
+              "Za 24–48h dobijaš gotovu pozivnicu",
+              "Pošalješ link — RSVP stiže automatski",
+            ].map((step, i) => (
+              <li key={i} className="flex items-start gap-3 text-sm leading-relaxed text-ink-soft">
+                <span className="mt-0.5 shrink-0 font-serif text-base leading-none text-gold">
+                  {`0${i + 1}`}
+                </span>
+                {step}
+              </li>
+            ))}
+          </ol>
+        </div>
       </div>
     </section>
   );

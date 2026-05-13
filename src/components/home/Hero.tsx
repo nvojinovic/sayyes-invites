@@ -65,7 +65,8 @@ export default function Hero() {
           </div>
         </div>
 
-        <div className="animate-fade-up delay-200 relative -mt-1 sm:mt-0">
+        {/* phone — hidden on mobile where it would push CTAs below fold */}
+        <div className="animate-fade-up delay-200 relative -mt-1 hidden md:block sm:mt-0">
           <PhoneMockup />
         </div>
       </div>

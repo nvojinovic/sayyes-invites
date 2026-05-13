@@ -1,25 +1,15 @@
 const PLANS = [
   {
-    name: "Basic",
-    price: "od €149",
-    note: "Elegantna osnova",
-    features: [
-      "Sajt-pozivnica",
-      "Detalji venčanja",
-      "Potvrda dolaska",
-    ],
-    highlighted: false,
-    cta: "Počni pozivnicu",
-  },
-  {
     name: "Standard",
     price: "od €199",
-    note: "Najčešći izbor",
+    note: "Sve što vam treba za savršen dan",
     features: [
-      "Sve iz Basic paketa",
-      "Galerija i raspored",
-      "Personalizovan stil",
-      "Gostima jasniji tok",
+      "Digitalna pozivnica po meri",
+      "Sve informacije o venčanju",
+      "Galerija fotografija",
+      "Potvrda dolaska (RSVP)",
+      "Mapa i navigacija do mesta",
+      "Personalizovan dizajn",
     ],
     highlighted: true,
     cta: "Počni svoju pozivnicu",
@@ -27,12 +17,13 @@ const PLANS = [
   {
     name: "Premium",
     price: "od €399",
-    note: "Potpun doživljaj",
+    note: "Za nezaboravan prvi utisak",
     features: [
       "Sve iz Standard paketa",
       "Naprednije animacije",
       "Višejezična verzija",
       "Posebni detalji po meri",
+      "Prioritetna izrada (do 24h)",
     ],
     highlighted: false,
     cta: "Zatraži ponudu",
@@ -81,14 +72,14 @@ export default function Pricing() {
           <p className="mx-auto mt-5 max-w-md text-lg leading-8 text-ink-soft">Bez pretplate. Bez skrivenih troškova.</p>
         </div>
 
-        <div className="mt-12 grid gap-5 md:grid-cols-3 md:items-stretch">
+        <div className="mt-12 mx-auto grid max-w-2xl gap-5 sm:grid-cols-2 sm:items-stretch">
           {PLANS.map((plan) => (
             <div
               key={plan.name}
               className={[
                 "relative flex flex-col rounded-[2rem] p-7 transition-all duration-500",
                 plan.highlighted
-                  ? "bg-ink text-ivory shadow-[0_40px_100px_-35px_rgba(42,35,32,0.7)] ring-1 ring-gold/40 md:z-10 md:scale-[1.04] hover:-translate-y-1 hover:shadow-[0_48px_120px_-35px_rgba(42,35,32,0.8)]"
+                  ? "bg-ink text-ivory shadow-[0_40px_100px_-35px_rgba(42,35,32,0.7)] ring-1 ring-gold/40 hover:-translate-y-1 hover:shadow-[0_48px_120px_-35px_rgba(42,35,32,0.8)]"
                   : "bg-white/70 ring-1 ring-champagne/50 backdrop-blur-sm hover:-translate-y-1 hover:ring-gold/40 hover:shadow-[0_30px_75px_-35px_rgba(42,35,32,0.3)]",
               ].join(" ")}
             >
