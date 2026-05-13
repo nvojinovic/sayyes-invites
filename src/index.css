@@ -95,6 +95,23 @@
     0%, 100% { transform: translateY(0); }
     50% { transform: translateY(-6px); }
   }
+  @keyframes reveal-blur {
+    from { opacity: 0; filter: blur(10px); transform: translateY(18px); }
+    to { opacity: 1; filter: blur(0); transform: translateY(0); }
+  }
+  @keyframes soft-pop {
+    from { opacity: 0; transform: translateY(10px) scale(0.98); }
+    to { opacity: 1; transform: translateY(0) scale(1); }
+  }
+  @keyframes phone-glow {
+    0%, 100% { opacity: 0.75; transform: scale(1); }
+    50% { opacity: 1; transform: scale(1.04); }
+  }
+  @keyframes sheen {
+    0%, 18% { transform: translateX(-160%) rotate(12deg); opacity: 0; }
+    28% { opacity: 1; }
+    46%, 100% { transform: translateX(520%) rotate(12deg); opacity: 0; }
+  }
 
   .animate-fade-up {
     animation: fade-up 0.9s cubic-bezier(0.22, 1, 0.36, 1) both;
@@ -104,6 +121,18 @@
   }
   .animate-float-slow {
     animation: float-slow 6s ease-in-out infinite;
+  }
+  .animate-reveal-blur {
+    animation: reveal-blur 1s cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+  .animate-soft-pop {
+    animation: soft-pop 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+  .animate-phone-glow {
+    animation: phone-glow 5s ease-in-out infinite;
+  }
+  .animate-sheen {
+    animation: sheen 7s ease-in-out 1.2s infinite;
   }
   .delay-100 { animation-delay: 0.1s; }
   .delay-200 { animation-delay: 0.2s; }
@@ -166,6 +195,20 @@
   .animate-floatY  { animation: floatY  6s ease-in-out infinite; }
   .animate-shimmer { animation: shimmer 3s ease-in-out infinite; }
 
+  /* Phone mockup — scales 390px invitation into the phone shell */
+  .phone-iframe {
+    width: 390px;
+    height: 844px;
+    border: none;
+    display: block;
+    transform: scale(0.713);
+    transform-origin: top left;
+    pointer-events: none;
+  }
+  @media (min-width: 768px) {
+    .phone-iframe { transform: scale(0.764); }
+  }
+
   /* Selection colour — scoped to wedding wrapper via class */
   .wedding-root ::selection {
     background-color: rgba(168, 188, 143, 0.4);
@@ -178,7 +221,9 @@
     }
 
     .animate-fade-up,
-    .animate-fade-in {
+    .animate-fade-in,
+    .animate-reveal-blur,
+    .animate-soft-pop {
       animation-duration: 0.45s;
     }
   }
@@ -186,7 +231,11 @@
   @media (prefers-reduced-motion: reduce) {
     .animate-fade-up,
     .animate-fade-in,
+    .animate-reveal-blur,
+    .animate-soft-pop,
     .animate-float-slow,
+    .animate-phone-glow,
+    .animate-sheen,
     .animate-floatY,
     .animate-shimmer {
       animation: none;

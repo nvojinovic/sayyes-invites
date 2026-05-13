@@ -1,41 +1,35 @@
+import { motion } from "framer-motion";
+import { useRevealVariants, VIEWPORT_ONCE } from "./_motion";
+
 const PLANS = [
-  {
-    name: "Basic",
-    price: "od €99",
-    note: "Idealno za jednostavne proslave",
-    features: [
-      "Digitalna pozivnica",
-      "Osnovne informacije",
-      "Potvrda dolaska",
-    ],
-    highlighted: false,
-    cta: "Pošalji upit",
-  },
   {
     name: "Standard",
     price: "od €199",
-    note: "Najpopularniji izbor",
+    note: "Sve što vam treba za savršen dan",
     features: [
-      "Sve iz Basic paketa",
-      "Više sekcija",
-      "Galerija slika",
+      "Digitalna pozivnica po meri",
+      "Sve informacije o venčanju",
+      "Galerija fotografija",
+      "Potvrda dolaska (RSVP)",
+      "Mapa i navigacija do mesta",
       "Personalizovan dizajn",
     ],
     highlighted: true,
-    cta: "Započni svoju pozivnicu",
+    cta: "Počni svoju pozivnicu",
   },
   {
     name: "Premium",
     price: "od €399",
-    note: "Za nezaboravan utisak",
+    note: "Za nezaboravan prvi utisak",
     features: [
       "Sve iz Standard paketa",
-      "Poseban stil",
-      "Animacije",
+      "Naprednije animacije",
       "Višejezična verzija",
+      "Posebni detalji po meri",
+      "Prioritetna izrada (do 24h)",
     ],
     highlighted: false,
-    cta: "Pošalji upit",
+    cta: "Zatraži ponudu",
   },
 ] as const;
 
@@ -62,57 +56,67 @@ function Check() {
 }
 
 export default function Pricing() {
+  const { fadeUpBlur, fadeUp, container } = useRevealVariants();
+
   return (
     <section
       id="cene"
-      className="relative overflow-hidden bg-ivory-deep py-16 sm:py-24 md:py-32"
+      className="relative overflow-hidden bg-ivory py-20 sm:py-28"
     >
       <div className="pointer-events-none absolute inset-0 -z-10">
         <div className="absolute left-1/2 top-0 h-[400px] w-[700px] -translate-x-1/2 rounded-full bg-[radial-gradient(closest-side,rgba(201,169,106,0.14),transparent_70%)] blur-3xl" />
       </div>
 
-      <div className="relative mx-auto max-w-5xl px-5 sm:px-6">
-        {/* Heading */}
-        <div className="text-center">
-          <div className="mx-auto mb-5 flex items-center justify-center gap-3">
-            <span className="h-px w-10 bg-gold/50" />
-            <span className="text-[11px] uppercase tracking-[0.4em] text-gold">
-              Cene
-            </span>
-            <span className="h-px w-10 bg-gold/50" />
-          </div>
+      <div className="relative mx-auto max-w-5xl px-6">
+        <motion.div
+          variants={container({ stagger: 0.12 })}
+          initial="hidden"
+          whileInView="show"
+          viewport={VIEWPORT_ONCE}
+          className="mx-auto max-w-3xl text-center"
+        >
+          <motion.h2
+            variants={fadeUpBlur}
+            className="font-serif text-[2.5rem] leading-[1.02] text-ink sm:text-5xl md:text-6xl"
+          >
+            Premium pozivnica,
+            <span className="italic text-gold"> jasna cena</span>
+          </motion.h2>
 
-          <h2 className="font-serif text-[2rem] leading-[1.1] text-ink sm:text-4xl md:text-5xl">
-            Jednostavne cene,
-            <span className="italic text-gold"> bez iznenađenja</span>
-          </h2>
+          <motion.p
+            variants={fadeUp}
+            className="mx-auto mt-5 max-w-md text-lg leading-8 text-ink-soft"
+          >
+            Bez pretplate. Bez skrivenih troškova.
+          </motion.p>
+        </motion.div>
 
-          <p className="mx-auto mt-4 max-w-md text-[15px] leading-7 text-ink-soft sm:text-base sm:leading-relaxed">
-            Sve je uključeno — nema skrivenih troškova, nema pretplate.
-          </p>
-        </div>
-
-        {/* Cards */}
-        <div className="mt-10 grid gap-5 sm:mt-14 lg:grid-cols-3 lg:items-stretch">
+        <motion.div
+          variants={container({ stagger: 0.18, delay: 0.1 })}
+          initial="hidden"
+          whileInView="show"
+          viewport={VIEWPORT_ONCE}
+          className="mt-12 mx-auto grid max-w-2xl gap-5 sm:grid-cols-2 sm:items-stretch"
+        >
           {PLANS.map((plan) => (
-            <div
+            <motion.div
               key={plan.name}
+              variants={fadeUp}
               className={[
-                "relative flex flex-col rounded-2xl p-6 transition-all duration-300 sm:p-7",
+                "relative flex flex-col rounded-[2rem] p-7 transition-all duration-500",
                 plan.highlighted
-                  ? "bg-ink text-ivory shadow-[0_30px_70px_-25px_rgba(42,35,32,0.55)] ring-1 ring-gold/40 lg:z-10 lg:scale-[1.04] hover:-translate-y-1 hover:shadow-[0_36px_80px_-25px_rgba(42,35,32,0.7)]"
-                  : "bg-white/70 ring-1 ring-champagne/50 backdrop-blur-sm hover:-translate-y-1 hover:ring-gold/40 hover:shadow-[0_24px_55px_-20px_rgba(42,35,32,0.22)]",
+                  ? "bg-ink text-ivory shadow-[0_40px_100px_-35px_rgba(42,35,32,0.7)] ring-1 ring-gold/40 hover:-translate-y-1 hover:shadow-[0_48px_120px_-35px_rgba(42,35,32,0.8)]"
+                  : "bg-white/70 ring-1 ring-champagne/50 backdrop-blur-sm hover:-translate-y-1 hover:ring-gold/40 hover:shadow-[0_30px_75px_-35px_rgba(42,35,32,0.3)]",
               ].join(" ")}
             >
               {plan.highlighted && (
                 <div className="absolute -top-3.5 left-1/2 -translate-x-1/2">
-                  <span className="inline-flex items-center rounded-full bg-gold px-3.5 py-1 text-[10px] font-semibold uppercase tracking-[0.2em] text-ivory shadow-md">
+                  <span className="inline-flex items-center rounded-full bg-gold px-4 py-1.5 text-[10px] font-semibold uppercase tracking-[0.2em] text-ivory shadow-md">
                     Najpopularniji
                   </span>
                 </div>
               )}
 
-              {/* Plan name + price */}
               <div>
                 <p
                   className={[
@@ -124,7 +128,7 @@ export default function Pricing() {
                 </p>
                 <p
                   className={[
-                    "mt-3 font-serif text-[2.35rem] leading-none sm:text-4xl",
+                    "mt-4 font-serif text-5xl",
                     plan.highlighted ? "text-ivory" : "text-ink",
                   ].join(" ")}
                 >
@@ -132,7 +136,7 @@ export default function Pricing() {
                 </p>
                 <p
                   className={[
-                    "mt-2 text-[13px] leading-5",
+                    "mt-2 text-sm",
                     plan.highlighted ? "text-ivory/60" : "text-ink-soft",
                   ].join(" ")}
                 >
@@ -140,7 +144,6 @@ export default function Pricing() {
                 </p>
               </div>
 
-              {/* Divider */}
               <div
                 className={[
                   "my-6 h-px",
@@ -148,7 +151,6 @@ export default function Pricing() {
                 ].join(" ")}
               />
 
-              {/* Features */}
               <ul className="flex-1 space-y-3.5">
                 {plan.features.map((f) => (
                   <li key={f} className="flex items-start gap-2.5">
@@ -185,11 +187,10 @@ export default function Pricing() {
                 ))}
               </ul>
 
-              {/* CTA */}
               <a
                 href="#kontakt"
                 className={[
-                  "mt-8 inline-flex min-h-12 items-center justify-center rounded-full px-4 py-3.5 text-center text-[12px] font-medium uppercase tracking-[0.14em] transition-all duration-200 active:scale-[0.97] sm:tracking-[0.18em]",
+                  "mt-8 inline-flex min-h-12 items-center justify-center rounded-full px-4 py-3 text-center text-[12px] font-medium uppercase tracking-[0.14em] transition-all duration-200 active:scale-[0.97] sm:tracking-[0.18em]",
                   plan.highlighted
                     ? "bg-gold text-ivory shadow-[0_8px_20px_-8px_rgba(180,138,74,0.7)] hover:-translate-y-0.5 hover:bg-gold-soft hover:shadow-[0_12px_28px_-8px_rgba(180,138,74,0.8)]"
                     : "border border-ink/15 bg-white/60 text-ink hover:-translate-y-0.5 hover:border-gold/50 hover:bg-white hover:shadow-[0_8px_20px_-8px_rgba(42,35,32,0.15)]",
@@ -198,13 +199,19 @@ export default function Pricing() {
                 {plan.cta}
                 <span className="ml-2 text-[13px]">→</span>
               </a>
-            </div>
+            </motion.div>
           ))}
-        </div>
+        </motion.div>
 
-        <p className="mx-auto mt-8 max-w-xs text-center text-[10px] uppercase leading-5 tracking-[0.24em] text-ink-soft sm:mt-10 sm:max-w-none sm:text-[11px] sm:tracking-[0.3em]">
-          Cene su orijentacione · Finalna cena zavisi od zahteva
-        </p>
+        <motion.p
+          variants={fadeUp}
+          initial="hidden"
+          whileInView="show"
+          viewport={VIEWPORT_ONCE}
+          className="mt-10 text-center text-sm text-ink-soft"
+        >
+          Finalna cena zavisi od obima i detalja pozivnice.
+        </motion.p>
       </div>
     </section>
   );

@@ -1,4 +1,18 @@
+import { motion } from "framer-motion";
+import { useRevealVariants, VIEWPORT_ONCE } from "./_motion";
+
+// TODO: replace placeholder WhatsApp number once real business line is provisioned.
+// Format: international, no leading "+", no spaces. Example: "381641234567".
+const WHATSAPP_NUMBER = "381000000000";
+const WHATSAPP_TEXT =
+  "Zdravo, zanima me digitalna pozivnica za venčanje.";
+const whatsappHref = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(
+  WHATSAPP_TEXT,
+)}`;
+
 export default function FirstCTA() {
+  const { fadeUp, fadeUpBlur, fadeIn, container } = useRevealVariants();
+
   return (
     <section
       id="kontakt"
@@ -9,22 +23,37 @@ export default function FirstCTA() {
         <div className="absolute -top-20 left-1/2 h-[420px] w-[420px] -translate-x-1/2 rounded-full bg-[radial-gradient(closest-side,rgba(180,138,74,0.22),transparent_70%)] blur-3xl" />
       </div>
 
-      <div className="relative mx-auto max-w-2xl px-5 text-center sm:px-6">
-        <div className="mx-auto mb-6 h-px w-12 bg-gold/60" />
+      <motion.div
+        variants={container({ stagger: 0.14, delay: 0.05 })}
+        initial="hidden"
+        whileInView="show"
+        viewport={VIEWPORT_ONCE}
+        className="relative mx-auto max-w-2xl px-5 text-center sm:px-6"
+      >
+        <motion.div variants={fadeUp} className="mx-auto mb-6 h-px w-12 bg-gold/60" />
 
-        <h2 className="font-serif text-[2rem] leading-[1.1] text-ink sm:text-4xl md:text-5xl">
+        <motion.h2
+          variants={fadeUpBlur}
+          className="font-serif text-[2rem] leading-[1.1] text-ink sm:text-4xl md:text-5xl"
+        >
           Spreman da tvoje venčanje
           <br className="hidden sm:block" />
           počne
           <span className="italic text-gold"> drugačije</span>?
-        </h2>
+        </motion.h2>
 
-        <p className="mx-auto mt-5 max-w-md text-[15px] leading-7 text-ink-soft sm:text-lg sm:leading-relaxed">
+        <motion.p
+          variants={fadeUp}
+          className="mx-auto mt-5 max-w-md text-[15px] leading-7 text-ink-soft sm:text-lg sm:leading-relaxed"
+        >
           Pošalji nam poruku i za 24–48h imaš pozivnicu koja radi sve
           umesto tebe.
-        </p>
+        </motion.p>
 
-        <div className="mt-10 flex flex-col items-center gap-3 sm:flex-row sm:justify-center">
+        <motion.div
+          variants={fadeUp}
+          className="mt-10 flex flex-col items-center gap-3 sm:flex-row sm:justify-center"
+        >
           <a
             href="mailto:hello@sayyesinvites.com"
             className="group relative inline-flex min-h-12 w-full max-w-sm items-center justify-center rounded-full bg-ink px-8 py-4 text-sm font-medium uppercase tracking-[0.1em] text-ivory shadow-[0_15px_40px_-15px_rgba(42,35,32,0.7)] transition-all duration-200 hover:-translate-y-0.5 hover:shadow-[0_22px_55px_-15px_rgba(42,35,32,0.8)] active:scale-[0.98] sm:w-auto sm:px-10 sm:tracking-[0.12em]"
@@ -34,7 +63,7 @@ export default function FirstCTA() {
             <span className="ml-3 transition-transform group-hover:translate-x-0.5">→</span>
           </a>
           <a
-            href="https://wa.me/381000000000?text=Zdravo%2C%20zanima%20me%20digitalna%20pozivnica%20za%20ven%C4%8Danje."
+            href={whatsappHref}
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex min-h-12 w-full max-w-sm items-center justify-center gap-2.5 rounded-full border border-ink/15 bg-white/40 px-8 py-4 text-sm font-medium tracking-wide text-ink backdrop-blur-sm transition-all hover:border-gold/50 hover:bg-white/70 sm:w-auto sm:px-8"
@@ -44,10 +73,13 @@ export default function FirstCTA() {
             </svg>
             WhatsApp
           </a>
-        </div>
+        </motion.div>
 
         {/* Urgency + trust */}
-        <div className="mt-8 flex flex-col items-center gap-2.5">
+        <motion.div
+          variants={fadeIn}
+          className="mt-8 flex flex-col items-center gap-2.5"
+        >
           <p className="text-[10px] uppercase leading-5 tracking-[0.28em] text-ink-soft sm:text-[11px] sm:tracking-[0.35em]">
             Bez obaveze • Odgovor u roku od 24h
           </p>
@@ -58,8 +90,8 @@ export default function FirstCTA() {
             </p>
             <span className="h-1 w-1 rounded-full bg-gold" />
           </div>
-        </div>
-      </div>
+        </motion.div>
+      </motion.div>
     </section>
   );
 }
