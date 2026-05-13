@@ -28,7 +28,7 @@ export default function PhoneMockup() {
       // Scroll iframe content if not at boundary
       if ((isScrollingDown && !isAtBottom) || (isScrollingUp && !isAtTop)) {
         e.preventDefault();
-        iframeWindow.scrollBy(0, e.deltaY * 2.2);
+        iframeWindow.scrollBy(0, e.deltaY * 1.9);
       }
     };
 
