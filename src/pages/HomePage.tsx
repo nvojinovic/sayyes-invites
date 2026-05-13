@@ -1,8 +1,6 @@
 import Hero from "../components/home/Hero";
-import EmotionalIntro from "../components/home/EmotionalIntro";
 import TrustBar from "../components/home/TrustBar";
-import LivePreview from "../components/home/LivePreview";
-import MidCTA from "../components/home/MidCTA";
+import TemplateShowcase from "../components/home/TemplateShowcase";
 import HowItWorks from "../components/home/HowItWorks";
 import PainReminder from "../components/home/PainReminder";
 import Pricing from "../components/home/Pricing";
@@ -12,10 +10,8 @@ export default function HomePage() {
   return (
     <main className="min-h-screen overflow-x-hidden bg-ivory text-ink">
       <Hero />
-      <EmotionalIntro />
       <TrustBar />
-      <LivePreview />
-      <MidCTA />
+      <TemplateShowcase />
       <HowItWorks />
       <PainReminder />
       <Pricing />

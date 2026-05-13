@@ -16,11 +16,33 @@ export default function Hero() {
         <a href="/" className="shrink-0 font-serif text-lg tracking-wide text-ink sm:text-xl">
           SayYes<span className="text-gold">.</span>
         </a>
+        <div className="hidden items-center gap-6 sm:flex">
+          <a
+            href="#templates"
+            className="text-xs uppercase tracking-[0.25em] text-ink-soft hover:text-ink transition-colors"
+          >
+            Stilovi
+          </a>
+          <a
+            href="#kako-funkcionise"
+            className="text-xs uppercase tracking-[0.25em] text-ink-soft hover:text-ink transition-colors"
+          >
+            Kako funkcioniše
+          </a>
+          <a
+            href="#kontakt"
+            className="rounded-full border border-ink/20 bg-white/40 px-4 py-2 text-xs font-medium uppercase tracking-[0.18em] text-ink backdrop-blur-sm transition-all hover:border-gold/50 hover:bg-white/70"
+          >
+            Kontakt
+          </a>
+        </div>
+
+        {/* Mobile-only compact CTA */}
         <a
-          href="#kako-funkcionise"
-          className="hidden text-xs uppercase tracking-[0.25em] text-ink-soft hover:text-ink transition-colors sm:inline-block"
+          href="#kontakt"
+          className="rounded-full border border-ink/15 bg-white/60 px-3.5 py-1.5 text-[11px] font-medium uppercase tracking-[0.16em] text-ink backdrop-blur-sm active:scale-95 transition-transform sm:hidden"
         >
-          Kako funkcioniše
+          Kontakt
         </a>
       </nav>
 
@@ -54,10 +76,10 @@ export default function Hero() {
 
           <div className="animate-fade-up delay-300 mt-7 flex flex-col items-stretch gap-3 sm:flex-row sm:items-center sm:justify-center md:justify-start">
             <a
-              href="/ivana-dimitrije"
+              href="#templates"
               className="group inline-flex min-h-12 items-center justify-center rounded-full bg-ink px-7 py-3.5 text-sm font-medium tracking-wide text-ivory shadow-[0_10px_30px_-12px_rgba(42,35,32,0.55)] transition-all hover:-translate-y-0.5 hover:shadow-[0_18px_40px_-12px_rgba(42,35,32,0.55)]"
             >
-              Otvori demo pozivnicu
+              Pogledaj stilove
               <span className="ml-2 transition-transform group-hover:translate-x-0.5">→</span>
             </a>
             <a
