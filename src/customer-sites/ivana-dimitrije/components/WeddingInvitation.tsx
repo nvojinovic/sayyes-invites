@@ -105,14 +105,18 @@ function MonogramSeal() {
 /* ------------------------------------------------------------------ */
 
 export default function WeddingInvitation() {
-  const [isOpened, setIsOpened] = useState(() => {
-    // Auto-open for preview mode (phone mockup on homepage)
+  const [isOpened, setIsOpened] = useState(false);
+
+  useEffect(() => {
+    // Auto-open for preview mode (phone mockup on homepage) with animation
     if (typeof window !== 'undefined') {
       const params = new URLSearchParams(window.location.search);
-      return params.has('preview');
+      if (params.has('preview')) {
+        const timer = setTimeout(() => setIsOpened(true), 800);
+        return () => clearTimeout(timer);
+      }
     }
-    return false;
-  });
+  }, []);
 
   return (
     <main className="relative min-h-screen overflow-x-hidden pb-[env(safe-area-inset-bottom)]">
