@@ -1,7 +1,45 @@
+'use client';
+
+import { useRef, useEffect } from 'react';
+
 export default function PhoneMockup() {
+  const iframeRef = useRef<HTMLIFrameElement>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const container = containerRef.current;
+    if (!container) return;
+
+    const handleWheel = (e: WheelEvent) => {
+      const iframe = iframeRef.current;
+      if (!iframe?.contentWindow) return;
+
+      const iframeWindow = iframe.contentWindow;
+      const iframeScrollTop = iframeWindow.scrollY || 0;
+      const iframeScrollHeight = iframeWindow.document.documentElement.scrollHeight;
+      const iframeClientHeight = iframeWindow.innerHeight;
+      const maxScroll = Math.max(0, iframeScrollHeight - iframeClientHeight);
+
+      const isAtBottom = iframeScrollTop >= maxScroll - 5;
+      const isAtTop = iframeScrollTop <= 0;
+      const isScrollingDown = e.deltaY > 0;
+      const isScrollingUp = e.deltaY < 0;
+
+      // Scroll iframe content if not at boundary
+      if ((isScrollingDown && !isAtBottom) || (isScrollingUp && !isAtTop)) {
+        e.preventDefault();
+        iframeWindow.scrollBy(0, e.deltaY);
+      }
+    };
+
+    container.addEventListener('wheel', handleWheel, { passive: false });
+    return () => container.removeEventListener('wheel', handleWheel);
+  }, []);
+
   return (
     <div
-      className="relative mx-auto aspect-[9/19] w-[212px] animate-float-slow transform-gpu sm:w-[290px] md:w-[310px]"
+      ref={containerRef}
+      className="relative mx-auto aspect-[9/19] w-[212px] animate-float-slow transform-gpu sm:w-[290px] md:w-[310px] cursor-grab active:cursor-grabbing"
       aria-hidden="true"
     >
       <div className="animate-phone-glow absolute -inset-7 bg-[radial-gradient(closest-side,rgba(201,169,106,0.24),transparent_70%)] blur-2xl sm:-inset-10 sm:bg-[radial-gradient(closest-side,rgba(201,169,106,0.28),transparent_70%)]" />
@@ -13,7 +51,7 @@ export default function PhoneMockup() {
         {/* live invitation screen */}
         <div className="relative h-full w-full overflow-hidden rounded-[38px] bg-[#FAF7F2]">
           <iframe
-            src="/ivana-dimitrije"
+            src="/ivana-dimitrije?preview=true"
             title="Demo pozivnica — Ivana & Dimitrije"
             tabIndex={-1}
             loading="lazy"

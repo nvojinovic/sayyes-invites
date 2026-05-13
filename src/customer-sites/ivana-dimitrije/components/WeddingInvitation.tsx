@@ -105,7 +105,14 @@ function MonogramSeal() {
 /* ------------------------------------------------------------------ */
 
 export default function WeddingInvitation() {
-  const [isOpened, setIsOpened] = useState(false);
+  const [isOpened, setIsOpened] = useState(() => {
+    // Auto-open for preview mode (phone mockup on homepage)
+    if (typeof window !== 'undefined') {
+      const params = new URLSearchParams(window.location.search);
+      return params.has('preview');
+    }
+    return false;
+  });
 
   return (
     <main className="relative min-h-screen overflow-x-hidden pb-[env(safe-area-inset-bottom)]">
