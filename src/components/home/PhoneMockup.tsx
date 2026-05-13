@@ -51,6 +51,7 @@ export default function PhoneMockup() {
         {/* live invitation screen */}
         <div className="relative h-full w-full overflow-hidden rounded-[38px] bg-[#FAF7F2]">
           <iframe
+            ref={iframeRef}
             src="/ivana-dimitrije?preview=true"
             title="Demo pozivnica — Ivana & Dimitrije"
             tabIndex={-1}
