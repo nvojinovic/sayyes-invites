@@ -28,9 +28,11 @@ export default function PhoneMockup() {
     const container = containerRef.current;
     if (!container) return;
 
-    const handleWheel = (e: WheelEvent) => {
+    let lastTouchY: number | null = null;
+
+    const scrollIframeBy = (deltaY: number) => {
       const iframe = iframeRef.current;
-      if (!iframe?.contentWindow) return;
+      if (!iframe?.contentWindow) return false;
 
       const iframeWindow = iframe.contentWindow;
       const iframeScrollTop = iframeWindow.scrollY || 0;
@@ -40,18 +42,56 @@ export default function PhoneMockup() {
 
       const isAtBottom = iframeScrollTop >= maxScroll - 5;
       const isAtTop = iframeScrollTop <= 0;
-      const isScrollingDown = e.deltaY > 0;
-      const isScrollingUp = e.deltaY < 0;
+      const isScrollingDown = deltaY > 0;
+      const isScrollingUp = deltaY < 0;
 
-      // Scroll iframe content if not at boundary
       if ((isScrollingDown && !isAtBottom) || (isScrollingUp && !isAtTop)) {
+        iframeWindow.scrollBy(0, deltaY);
+        return true;
+      }
+
+      return false;
+    };
+
+    const handleWheel = (e: WheelEvent) => {
+      if (scrollIframeBy(e.deltaY * 1.9)) {
         e.preventDefault();
-        iframeWindow.scrollBy(0, e.deltaY * 1.9);
       }
     };
 
+    const handleTouchStart = (e: TouchEvent) => {
+      lastTouchY = e.touches[0]?.clientY ?? null;
+    };
+
+    const handleTouchMove = (e: TouchEvent) => {
+      const currentY = e.touches[0]?.clientY;
+      if (currentY === undefined || lastTouchY === null) return;
+
+      const deltaY = lastTouchY - currentY;
+      lastTouchY = currentY;
+
+      if (scrollIframeBy(deltaY)) {
+        e.preventDefault();
+      }
+    };
+
+    const handleTouchEnd = () => {
+      lastTouchY = null;
+    };
+
     container.addEventListener('wheel', handleWheel, { passive: false });
-    return () => container.removeEventListener('wheel', handleWheel);
+    container.addEventListener('touchstart', handleTouchStart, { passive: true });
+    container.addEventListener('touchmove', handleTouchMove, { passive: false });
+    container.addEventListener('touchend', handleTouchEnd);
+    container.addEventListener('touchcancel', handleTouchEnd);
+
+    return () => {
+      container.removeEventListener('wheel', handleWheel);
+      container.removeEventListener('touchstart', handleTouchStart);
+      container.removeEventListener('touchmove', handleTouchMove);
+      container.removeEventListener('touchend', handleTouchEnd);
+      container.removeEventListener('touchcancel', handleTouchEnd);
+    };
   }, []);
 
   return (
