@@ -6,6 +6,7 @@ import { motion, useScroll, useTransform, useReducedMotion } from 'framer-motion
 export default function PhoneMockup() {
   const iframeRef = useRef<HTMLIFrameElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
+  const screenTouchRef = useRef<HTMLDivElement>(null);
   const parallaxRef = useRef<HTMLDivElement>(null);
   const reduce = useReducedMotion();
 
@@ -26,7 +27,8 @@ export default function PhoneMockup() {
 
   useEffect(() => {
     const container = containerRef.current;
-    if (!container) return;
+    const screenTouchTarget = screenTouchRef.current;
+    if (!container || !screenTouchTarget) return;
 
     let lastTouchY: number | null = null;
 
@@ -67,12 +69,11 @@ export default function PhoneMockup() {
       const currentY = e.touches[0]?.clientY;
       if (currentY === undefined || lastTouchY === null) return;
 
-      const deltaY = lastTouchY - currentY;
+      const deltaY = (lastTouchY - currentY) * 1.6;
       lastTouchY = currentY;
 
-      if (scrollIframeBy(deltaY)) {
-        e.preventDefault();
-      }
+      e.preventDefault();
+      scrollIframeBy(deltaY);
     };
 
     const handleTouchEnd = () => {
@@ -80,17 +81,17 @@ export default function PhoneMockup() {
     };
 
     container.addEventListener('wheel', handleWheel, { passive: false });
-    container.addEventListener('touchstart', handleTouchStart, { passive: true });
-    container.addEventListener('touchmove', handleTouchMove, { passive: false });
-    container.addEventListener('touchend', handleTouchEnd);
-    container.addEventListener('touchcancel', handleTouchEnd);
+    screenTouchTarget.addEventListener('touchstart', handleTouchStart, { passive: true });
+    screenTouchTarget.addEventListener('touchmove', handleTouchMove, { passive: false });
+    screenTouchTarget.addEventListener('touchend', handleTouchEnd);
+    screenTouchTarget.addEventListener('touchcancel', handleTouchEnd);
 
     return () => {
       container.removeEventListener('wheel', handleWheel);
-      container.removeEventListener('touchstart', handleTouchStart);
-      container.removeEventListener('touchmove', handleTouchMove);
-      container.removeEventListener('touchend', handleTouchEnd);
-      container.removeEventListener('touchcancel', handleTouchEnd);
+      screenTouchTarget.removeEventListener('touchstart', handleTouchStart);
+      screenTouchTarget.removeEventListener('touchmove', handleTouchMove);
+      screenTouchTarget.removeEventListener('touchend', handleTouchEnd);
+      screenTouchTarget.removeEventListener('touchcancel', handleTouchEnd);
     };
   }, []);
 
@@ -120,6 +121,12 @@ export default function PhoneMockup() {
               tabIndex={-1}
               loading="eager"
               className="phone-iframe"
+            />
+            <div
+              ref={screenTouchRef}
+              className="absolute inset-0 z-10 cursor-grab active:cursor-grabbing"
+              style={{ touchAction: 'none' }}
+              aria-hidden="true"
             />
           </div>
         </div>
