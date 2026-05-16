@@ -10,7 +10,6 @@ import { useEffect, useState, useRef } from "react";
 import { motion, AnimatePresence, useInView } from "framer-motion";
 import { Check, X } from "lucide-react";
 
-const PHONE = "381600000000";
 const CONFIRM = "Pozdrav, potvrđujem dolazak na venčanje Ane i Marka.";
 const DECLINE = "Pozdrav, nažalost neću moći da dođem na venčanje Ane i Marka.";
 
@@ -424,7 +423,7 @@ function RsvpSection() {
   const ref = useRef<HTMLDivElement>(null);
   const inView = useInView(ref, { once: true, margin: "-60px" });
 
-  const waLink = (msg: string) => `https://wa.me/${PHONE}?text=${encodeURIComponent(msg)}`;
+  const waLink = (msg: string) => `https://wa.me/?text=${encodeURIComponent(msg)}`;
   const vbLink = (msg: string) => `viber://forward?text=${encodeURIComponent(msg)}`;
 
   return (

@@ -13,7 +13,6 @@ const COVER_PHOTO =
 const PORTRAIT_PHOTO =
   "https://images.unsplash.com/photo-1469371670807-013ccf25f16a?auto=format&fit=crop&w=800&q=80";
 
-const PHONE = "381600000000";
 const CONFIRM = "Pozdrav, potvrđujem dolazak na venčanje Katarine i Jovana.";
 const DECLINE = "Pozdrav, nažalost neću moći da dođem na venčanje Katarine i Jovana.";
 
@@ -486,7 +485,7 @@ function RsvpSpread() {
   const ref = useRef<HTMLDivElement>(null);
   const inView = useInView(ref, { once: true, margin: "-80px" });
 
-  const waLink = (msg: string) => `https://wa.me/${PHONE}?text=${encodeURIComponent(msg)}`;
+  const waLink = (msg: string) => `https://wa.me/?text=${encodeURIComponent(msg)}`;
   const vbLink = (msg: string) => `viber://forward?text=${encodeURIComponent(msg)}`;
 
   return (

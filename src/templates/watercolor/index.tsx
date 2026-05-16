@@ -9,7 +9,6 @@ import { useEffect, useState, useRef } from "react";
 import { motion, AnimatePresence, useInView } from "framer-motion";
 import { Heart, MapPin, Clock, Check, X, ChevronDown } from "lucide-react";
 
-const PHONE = "381600000000";
 const CONFIRM = "Pozdrav, potvrđujem dolazak na venčanje Lune i Vuka.";
 const DECLINE = "Pozdrav, nažalost neću moći da dođem na venčanje Lune i Vuka.";
 
@@ -17,7 +16,11 @@ type Intent = "confirm" | "decline";
 
 /* ─── Animated blob background ─── */
 
-function BlobBackground() {
+function BlobBackground({ lightweight = false }: { lightweight?: boolean }) {
+  if (lightweight) {
+    return <div className="watercolor-static-bg" aria-hidden="true" />;
+  }
+
   return (
     <div style={{ position: "fixed", inset: 0, zIndex: 0, overflow: "hidden", pointerEvents: "none" }}>
       <svg style={{ position: "absolute", width: 0, height: 0 }}>
@@ -98,6 +101,11 @@ function BlobBackground() {
 
 export default function WatercolorTemplate() {
   const [opened, setOpened] = useState(false);
+  const [useLightweightEffects] = useState(
+    () =>
+      typeof window !== "undefined" &&
+      window.matchMedia("(max-width: 640px), (hover: none) and (pointer: coarse)").matches,
+  );
 
   useEffect(() => {
     document.body.style.background = "#FEF9F7";
@@ -114,7 +122,7 @@ export default function WatercolorTemplate() {
 
   return (
     <div className="template-page" style={{ background: "#FEF9F7", minHeight: "100vh", position: "relative" }}>
-      <BlobBackground />
+      <BlobBackground lightweight={useLightweightEffects} />
       <div style={{ position: "relative", zIndex: 1 }}>
         <AnimatePresence mode="wait">
           {!opened ? (
@@ -503,7 +511,7 @@ function LocationSection() {
 function RsvpSection() {
   const [intent, setIntent] = useState<Intent | null>(null);
 
-  const waLink = (msg: string) => `https://wa.me/${PHONE}?text=${encodeURIComponent(msg)}`;
+  const waLink = (msg: string) => `https://wa.me/?text=${encodeURIComponent(msg)}`;
   const vbLink = (msg: string) => `viber://forward?text=${encodeURIComponent(msg)}`;
 
   return (
