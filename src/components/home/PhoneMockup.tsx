@@ -8,6 +8,7 @@ export default function PhoneMockup() {
   const containerRef = useRef<HTMLDivElement>(null);
   const screenTouchRef = useRef<HTMLDivElement>(null);
   const parallaxRef = useRef<HTMLDivElement>(null);
+  const iframeScrollPreparedRef = useRef(false);
   const reduce = useReducedMotion();
 
   // Subtle scroll-linked parallax. As the hero scrolls past, the phone
@@ -31,6 +32,7 @@ export default function PhoneMockup() {
 
     iframeDocument.documentElement.style.scrollBehavior = 'auto';
     iframeDocument.body.style.scrollBehavior = 'auto';
+    iframeScrollPreparedRef.current = true;
   };
 
   useEffect(() => {
@@ -53,7 +55,9 @@ export default function PhoneMockup() {
       if (!iframe?.contentWindow) return false;
 
       const iframeWindow = iframe.contentWindow;
-      disableIframeSmoothScroll();
+      if (!iframeScrollPreparedRef.current) {
+        disableIframeSmoothScroll();
+      }
       const iframeScrollTop = iframeWindow.scrollY || 0;
       const iframeScrollHeight = iframeWindow.document.documentElement.scrollHeight;
       const iframeClientHeight = iframeWindow.innerHeight;
@@ -88,7 +92,7 @@ export default function PhoneMockup() {
       if (currentY === undefined || lastTouchY === null) return;
 
       const iframeScale = Math.max(0.35, getIframeScale());
-      const deltaY = ((lastTouchY - currentY) / iframeScale) * 2.2;
+      const deltaY = ((lastTouchY - currentY) / iframeScale) * 1.25;
       lastTouchY = currentY;
 
       if (scrollIframeBy(deltaY)) {
@@ -140,7 +144,10 @@ export default function PhoneMockup() {
               title="Demo pozivnica — Ivana & Dimitrije"
               tabIndex={-1}
               loading="eager"
-              onLoad={disableIframeSmoothScroll}
+              onLoad={() => {
+                iframeScrollPreparedRef.current = false;
+                disableIframeSmoothScroll();
+              }}
               className="phone-iframe"
             />
             <div
