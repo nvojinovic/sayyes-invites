@@ -208,6 +208,18 @@
   .phone-iframe-touch {
     pointer-events: auto;
   }
+
+  .watercolor-static-bg {
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    background:
+      radial-gradient(circle at 18% 16%, rgba(230, 170, 170, 0.28), transparent 34%),
+      radial-gradient(circle at 86% 36%, rgba(190, 170, 230, 0.24), transparent 36%),
+      radial-gradient(circle at 45% 88%, rgba(160, 210, 185, 0.22), transparent 38%),
+      #fef9f7;
+  }
   @media (min-width: 640px) {
     .phone-iframe { transform: scale(0.713); }
   }
@@ -395,6 +407,8 @@
 
     .watercolor-card {
       background: rgba(255, 255, 255, 0.78) !important;
+      backdrop-filter: none !important;
+      -webkit-backdrop-filter: none !important;
       box-shadow: 0 18px 50px -18px rgba(130, 80, 120, 0.26),
         0 1px 16px rgba(255, 255, 255, 0.86) inset !important;
     }

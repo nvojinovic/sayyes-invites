@@ -15,7 +15,6 @@ const CREAM = "#F5E8C8";
 const BLACK = "#080604";
 const DARK = "#100E08";
 
-const PHONE = "381600000000";
 const CONFIRM = "Pozdrav, potvrđujem dolazak na venčanje Isidore i Filipa.";
 const DECLINE = "Pozdrav, nažalost neću moći da dođem na venčanje Isidore i Filipa.";
 
@@ -453,7 +452,7 @@ function GatsbyRsvp() {
   const ref = useRef<HTMLDivElement>(null);
   const inView = useInView(ref, { once: true, margin: "-80px" });
 
-  const waLink = (msg: string) => `https://wa.me/${PHONE}?text=${encodeURIComponent(msg)}`;
+  const waLink = (msg: string) => `https://wa.me/?text=${encodeURIComponent(msg)}`;
   const vbLink = (msg: string) => `viber://forward?text=${encodeURIComponent(msg)}`;
 
   return (

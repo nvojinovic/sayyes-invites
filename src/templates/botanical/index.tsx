@@ -15,7 +15,6 @@ const FOREST_IMG  = "https://images.unsplash.com/photo-1448375240586-882707db888
 const FLOWERS_IMG = "https://images.unsplash.com/photo-1490750967868-88df5691cc13?auto=format&fit=crop&w=1200&q=80";
 const FERN_IMG    = "https://images.unsplash.com/photo-1518531933037-91b2f5f229cc?auto=format&fit=crop&w=1200&q=80";
 
-const PHONE = "381600000000";
 const CONFIRM = "Pozdrav, potvrđujem dolazak na venčanje Tanje i Boška.";
 const DECLINE = "Pozdrav, nažalost neću moći da dođem na venčanje Tanje i Boška.";
 
@@ -391,7 +390,7 @@ function LocationOverlay() {
 function RsvpOverlay() {
   const [intent, setIntent] = useState<Intent | null>(null);
 
-  const waLink = (msg: string) => `https://wa.me/${PHONE}?text=${encodeURIComponent(msg)}`;
+  const waLink = (msg: string) => `https://wa.me/?text=${encodeURIComponent(msg)}`;
   const vbLink = (msg: string) => `viber://forward?text=${encodeURIComponent(msg)}`;
 
   return (
