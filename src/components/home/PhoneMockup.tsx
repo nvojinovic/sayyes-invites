@@ -25,6 +25,14 @@ export default function PhoneMockup() {
     reduce ? [1, 1, 1] : [0.985, 1, 0.985],
   );
 
+  const disableIframeSmoothScroll = () => {
+    const iframeDocument = iframeRef.current?.contentWindow?.document;
+    if (!iframeDocument) return;
+
+    iframeDocument.documentElement.style.scrollBehavior = 'auto';
+    iframeDocument.body.style.scrollBehavior = 'auto';
+  };
+
   useEffect(() => {
     const container = containerRef.current;
     const screenTouchTarget = screenTouchRef.current;
@@ -45,10 +53,12 @@ export default function PhoneMockup() {
       if (!iframe?.contentWindow) return false;
 
       const iframeWindow = iframe.contentWindow;
+      disableIframeSmoothScroll();
       const iframeScrollTop = iframeWindow.scrollY || 0;
       const iframeScrollHeight = iframeWindow.document.documentElement.scrollHeight;
       const iframeClientHeight = iframeWindow.innerHeight;
       const maxScroll = Math.max(0, iframeScrollHeight - iframeClientHeight);
+      const nextScrollTop = Math.min(maxScroll, Math.max(0, iframeScrollTop + deltaY));
 
       const isAtBottom = iframeScrollTop >= maxScroll - 5;
       const isAtTop = iframeScrollTop <= 0;
@@ -56,7 +66,7 @@ export default function PhoneMockup() {
       const isScrollingUp = deltaY < 0;
 
       if ((isScrollingDown && !isAtBottom) || (isScrollingUp && !isAtTop)) {
-        iframeWindow.scrollBy(0, deltaY);
+        iframeWindow.scrollTo({ top: nextScrollTop, left: 0, behavior: 'auto' });
         return true;
       }
 
@@ -78,7 +88,7 @@ export default function PhoneMockup() {
       if (currentY === undefined || lastTouchY === null) return;
 
       const iframeScale = Math.max(0.35, getIframeScale());
-      const deltaY = ((lastTouchY - currentY) / iframeScale) * 1.35;
+      const deltaY = ((lastTouchY - currentY) / iframeScale) * 2.2;
       lastTouchY = currentY;
 
       if (scrollIframeBy(deltaY)) {
@@ -130,6 +140,7 @@ export default function PhoneMockup() {
               title="Demo pozivnica — Ivana & Dimitrije"
               tabIndex={-1}
               loading="eager"
+              onLoad={disableIframeSmoothScroll}
               className="phone-iframe"
             />
             <div
