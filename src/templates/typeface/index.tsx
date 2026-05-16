@@ -6,7 +6,7 @@
  * Every section is a typographic "moment".
  */
 
-import { useState, useRef } from "react";
+import { useEffect, useState, useRef } from "react";
 import { motion, AnimatePresence, useInView } from "framer-motion";
 import { Check, X } from "lucide-react";
 
@@ -46,8 +46,12 @@ function RevealWords({ text, delay = 0, style }: { text: string; delay?: number;
 export default function TypefaceTemplate() {
   const [opened, setOpened] = useState(false);
 
+  useEffect(() => {
+    if (opened) window.scrollTo({ top: 0, left: 0, behavior: "auto" });
+  }, [opened]);
+
   return (
-    <div style={{ background: "#FFFFFF", color: "#0A0A0A", fontFamily: "'Inter', system-ui, sans-serif", minHeight: "100vh" }}>
+    <div className="template-page" style={{ background: "#FFFFFF", color: "#0A0A0A", fontFamily: "'Inter', system-ui, sans-serif", minHeight: "100vh" }}>
       <AnimatePresence mode="wait">
         {!opened ? (
           <TypeCover key="cover" onOpen={() => setOpened(true)} />
@@ -65,10 +69,11 @@ function TypeCover({ onOpen }: { onOpen: () => void }) {
   return (
     <motion.div
       exit={{ opacity: 0, y: -20, transition: { duration: 0.4 } }}
+      className="mobile-type-cover"
       style={{ minHeight: "100vh", display: "flex", flexDirection: "column", padding: "2rem", position: "relative", overflow: "hidden" }}
     >
       {/* Top bar */}
-      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", borderBottom: "1.5px solid #0A0A0A", paddingBottom: "1rem", marginBottom: "4rem" }}>
+      <div className="type-cover-bar" style={{ display: "flex", justifyContent: "space-between", alignItems: "center", borderBottom: "1.5px solid #0A0A0A", paddingBottom: "1rem", marginBottom: "4rem" }}>
         <motion.span
           initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.1 }}
           style={{ fontSize: "0.6rem", letterSpacing: "0.45em", textTransform: "uppercase" }}
@@ -135,6 +140,7 @@ function TypeCover({ onOpen }: { onOpen: () => void }) {
 
       {/* Bottom info row */}
       <motion.div
+        className="type-cover-bottom"
         initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 1.2 }}
         style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-end", borderTop: "1.5px solid #0A0A0A", paddingTop: "1rem", marginTop: "4rem" }}
       >
@@ -148,6 +154,7 @@ function TypeCover({ onOpen }: { onOpen: () => void }) {
         </div>
         <div style={{ textAlign: "right" }}>
           <button
+            className="mobile-button"
             onClick={onOpen}
             style={{
               background: "#0A0A0A", color: "#FFFFFF",
@@ -171,7 +178,7 @@ function TypeContent() {
   return (
     <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.5 }}>
       {/* Sticky minimal header */}
-      <div style={{ position: "sticky", top: 0, zIndex: 40, background: "#FFFFFF", borderBottom: "1.5px solid #0A0A0A", padding: "0.75rem 2rem", display: "flex", justifyContent: "space-between" }}>
+      <div className="mobile-sticky-header" style={{ position: "sticky", top: 0, zIndex: 40, background: "#FFFFFF", borderBottom: "1.5px solid #0A0A0A", padding: "0.75rem 2rem", display: "flex", justifyContent: "space-between" }}>
         <span style={{ fontSize: "0.65rem", letterSpacing: "0.35em", textTransform: "uppercase", fontWeight: 600 }}>Ana &amp; Marko</span>
         <span style={{ fontSize: "0.65rem", letterSpacing: "0.35em", textTransform: "uppercase", color: "#666" }}>26.04.2025</span>
       </div>
@@ -193,7 +200,7 @@ function LetterSection() {
   const inView = useInView(ref, { once: true, margin: "-60px" });
 
   return (
-    <section ref={ref} style={{ padding: "6rem 2rem", maxWidth: 1000, margin: "0 auto" }}>
+    <section ref={ref} className="mobile-section" style={{ padding: "6rem 2rem", maxWidth: 1000, margin: "0 auto" }}>
       <motion.p
         initial={{ opacity: 0 }} animate={inView ? { opacity: 1 } : {}} transition={{ duration: 0.6 }}
         style={{ fontSize: "0.6rem", letterSpacing: "0.45em", textTransform: "uppercase", color: "#666", marginBottom: "2rem" }}
@@ -236,7 +243,7 @@ function DateSection() {
   const inView = useInView(ref, { once: true, margin: "-60px" });
 
   return (
-    <section ref={ref} style={{ background: "#0A0A0A", padding: "4rem 2rem", overflow: "hidden" }}>
+    <section ref={ref} className="mobile-section-tight" style={{ background: "#0A0A0A", padding: "4rem 2rem", overflow: "hidden" }}>
       <motion.p
         initial={{ opacity: 0 }} animate={inView ? { opacity: 1 } : {}}
         style={{ fontSize: "0.6rem", letterSpacing: "0.45em", textTransform: "uppercase", color: "#666", marginBottom: "1.5rem" }}
@@ -304,7 +311,7 @@ function ProgramSection() {
   const inView = useInView(ref, { once: true, margin: "-60px" });
 
   return (
-    <section ref={ref} style={{ padding: "6rem 2rem", maxWidth: 1000, margin: "0 auto" }}>
+    <section ref={ref} className="mobile-section" style={{ padding: "6rem 2rem", maxWidth: 1000, margin: "0 auto" }}>
       <motion.p
         initial={{ opacity: 0 }} animate={inView ? { opacity: 1 } : {}}
         style={{ fontSize: "0.6rem", letterSpacing: "0.45em", textTransform: "uppercase", color: "#666", marginBottom: "3rem" }}
@@ -318,6 +325,7 @@ function ProgramSection() {
           initial={{ opacity: 0, x: -20 }}
           animate={inView ? { opacity: 1, x: 0 } : {}}
           transition={{ delay: i * 0.1, duration: 0.6 }}
+          className="mobile-program-row"
           style={{
             display: "grid",
             gridTemplateColumns: "3rem 1fr 1fr",
@@ -358,7 +366,7 @@ function LocationSection() {
   const inView = useInView(ref, { once: true, margin: "-60px" });
 
   return (
-    <section ref={ref} style={{ background: "#F5F5F5", padding: "6rem 2rem" }}>
+    <section ref={ref} className="mobile-section" style={{ background: "#F5F5F5", padding: "6rem 2rem" }}>
       <div style={{ maxWidth: 1000, margin: "0 auto" }}>
         <motion.p
           initial={{ opacity: 0 }} animate={inView ? { opacity: 1 } : {}}
@@ -367,7 +375,7 @@ function LocationSection() {
           04 — Lokacije
         </motion.p>
 
-        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "4rem" }}>
+        <div className="mobile-stack" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "4rem" }}>
           {[
             { place: "Crkva Sv. Marka", addr: "Takovska 9, Beograd", time: "14:00", map: "https://www.google.com/maps/search/?api=1&query=Crkva+Svetog+Marka+Beograd" },
             { place: "Hotel Moskva", addr: "Balkanska 1, Beograd", time: "16:00", map: "https://www.google.com/maps/search/?api=1&query=Hotel+Moskva+Beograd" },
@@ -411,7 +419,7 @@ function RsvpSection() {
   const vbLink = (msg: string) => `viber://forward?text=${encodeURIComponent(msg)}`;
 
   return (
-    <section ref={ref} style={{ padding: "6rem 2rem", maxWidth: 1000, margin: "0 auto" }}>
+    <section ref={ref} className="mobile-section" style={{ padding: "6rem 2rem", maxWidth: 1000, margin: "0 auto" }}>
       <motion.p
         initial={{ opacity: 0 }} animate={inView ? { opacity: 1 } : {}}
         style={{ fontSize: "0.6rem", letterSpacing: "0.45em", textTransform: "uppercase", color: "#666", marginBottom: "2rem" }}
@@ -419,7 +427,7 @@ function RsvpSection() {
         05 — Potvrda dolaska
       </motion.p>
 
-      <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "4rem", alignItems: "start" }}>
+      <div className="mobile-stack" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "4rem", alignItems: "start" }}>
         <motion.div
           initial={{ opacity: 0, y: 20 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.8 }}
         >
@@ -444,6 +452,7 @@ function RsvpSection() {
         >
           <button
             onClick={() => setIntent("confirm")}
+            className="mobile-button"
             style={{
               background: "#0A0A0A", color: "#FFFFFF",
               border: "1.5px solid #0A0A0A", cursor: "pointer",
@@ -459,6 +468,7 @@ function RsvpSection() {
           </button>
           <button
             onClick={() => setIntent("decline")}
+            className="mobile-button"
             style={{
               background: "transparent", color: "#0A0A0A",
               border: "1.5px solid #0A0A0A", cursor: "pointer",
@@ -484,11 +494,12 @@ function RsvpSection() {
             <motion.div
               initial={{ y: 30, opacity: 0 }} animate={{ y: 0, opacity: 1 }} exit={{ y: 30, opacity: 0 }}
               onClick={(e) => e.stopPropagation()}
+              className="mobile-modal"
               style={{ background: "#FFFFFF", border: "1.5px solid #0A0A0A", padding: "3rem", maxWidth: 400, width: "100%", textAlign: "center" }}
             >
               <p style={{ fontSize: "0.6rem", letterSpacing: "0.4em", textTransform: "uppercase", color: "#999", marginBottom: "0.5rem" }}>Pošalji poruku</p>
               <h3 style={{ fontFamily: "'Playfair Display', Georgia, serif", fontStyle: "italic", fontSize: "2rem", color: "#0A0A0A", marginBottom: "2rem" }}>Otvori u</h3>
-              <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "0", border: "1.5px solid #0A0A0A", marginBottom: "1.5rem" }}>
+              <div className="mobile-modal-grid" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "0", border: "1.5px solid #0A0A0A", marginBottom: "1.5rem" }}>
                 <a href={waLink(intent === "confirm" ? CONFIRM : DECLINE)} target="_blank" rel="noopener noreferrer"
                   style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "0.75rem", padding: "1.5rem", textDecoration: "none", color: "#0A0A0A", borderRight: "1px solid #0A0A0A" }}>
                   <span style={{ width: 44, height: 44, background: "#25D366", borderRadius: "50%", display: "grid", placeItems: "center" }}><WhatsAppIcon /></span>

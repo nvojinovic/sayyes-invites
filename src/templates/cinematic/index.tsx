@@ -33,7 +33,7 @@ export default function CinematicTemplate() {
   }, []);
 
   return (
-    <main style={{ background: "#060606", color: "#EDE3D0" }}>
+    <main className="template-page" style={{ background: "#060606", color: "#EDE3D0" }}>
       <HeroSection />
       <StorySection />
       <ScheduleSection />
@@ -172,12 +172,13 @@ function StorySection() {
   return (
     <section
       ref={ref}
+      className="mobile-section"
       style={{ background: "#0E0C09", padding: "6rem 1.5rem", position: "relative", overflow: "hidden" }}
     >
       {/* Decorative vertical gold line */}
       <div style={{ position: "absolute", left: "50%", top: 0, bottom: 0, width: 1, background: "linear-gradient(to bottom, transparent, #C9952A22, transparent)" }} />
 
-      <div style={{ maxWidth: 1100, margin: "0 auto", display: "grid", gridTemplateColumns: "1fr 1fr", gap: "4rem", alignItems: "center" }}>
+      <div className="mobile-stack" style={{ maxWidth: 1100, margin: "0 auto", display: "grid", gridTemplateColumns: "1fr 1fr", gap: "4rem", alignItems: "center" }}>
         {/* Photo */}
         <motion.div
           initial={{ opacity: 0, x: -60 }}
@@ -201,7 +202,7 @@ function StorySection() {
             }}
           />
           {/* Caption tag */}
-          <div style={{
+          <div className="mobile-bleed-caption" style={{
             position: "absolute", bottom: "-1.5rem", right: "-1.5rem",
             background: "#C9952A", padding: "0.5rem 1.2rem",
           }}>
@@ -267,7 +268,7 @@ function ScheduleSection() {
   const inView = useInView(ref, { once: true, margin: "-80px" });
 
   return (
-    <section ref={ref} style={{ padding: "6rem 1.5rem", background: "#060606", position: "relative" }}>
+    <section ref={ref} className="mobile-section" style={{ padding: "6rem 1.5rem", background: "#060606", position: "relative" }}>
       <motion.p
         initial={{ opacity: 0 }}
         animate={inView ? { opacity: 1 } : {}}
@@ -292,13 +293,14 @@ function ScheduleSection() {
       </motion.h2>
 
       {/* Card strip */}
-      <div style={{ maxWidth: 1100, margin: "0 auto", display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))", gap: "1px", background: "#C9952A22" }}>
+      <div className="mobile-stack-compact" style={{ maxWidth: 1100, margin: "0 auto", display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))", gap: "1px", background: "#C9952A22" }}>
         {schedule.map((item, i) => (
           <motion.div
             key={item.num}
             initial={{ opacity: 0, y: 40 }}
             animate={inView ? { opacity: 1, y: 0 } : {}}
             transition={{ delay: 0.15 * i, duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+            className="mobile-card"
             style={{ background: "#0E0C09", padding: "3rem 2rem", position: "relative" }}
           >
             <span style={{
@@ -341,7 +343,7 @@ function LocationSection() {
   const inView = useInView(ref, { once: true, margin: "-80px" });
 
   return (
-    <section ref={ref} style={{ position: "relative", minHeight: "80vh", display: "flex", alignItems: "center", overflow: "hidden" }}>
+    <section ref={ref} className="mobile-parallax-section" style={{ position: "relative", minHeight: "80vh", display: "flex", alignItems: "center", overflow: "hidden" }}>
       <img src={VENUE_PHOTO} alt="" style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover" }} />
       <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to right, rgba(6,6,6,0.9) 0%, rgba(6,6,6,0.5) 50%, rgba(6,6,6,0.1) 100%)" }} />
 
@@ -349,6 +351,7 @@ function LocationSection() {
         initial={{ opacity: 0, x: -50 }}
         animate={inView ? { opacity: 1, x: 0 } : {}}
         transition={{ duration: 1.2 }}
+        className="mobile-card"
         style={{ position: "relative", zIndex: 10, padding: "4rem 2.5rem", maxWidth: 600 }}
       >
         <p style={{ fontSize: "0.65rem", letterSpacing: "0.45em", textTransform: "uppercase", color: "#C9952A", marginBottom: "1.5rem" }}>
@@ -371,6 +374,7 @@ function LocationSection() {
           href="https://www.google.com/maps/search/?api=1&query=Splendid+Conference+Spa+Beograd"
           target="_blank"
           rel="noopener noreferrer"
+          className="mobile-button"
           style={{
             display: "inline-flex", alignItems: "center", gap: "0.6rem",
             border: "1px solid #C9952A", color: "#C9952A",
@@ -398,7 +402,7 @@ function RsvpSection() {
   const vbLink = (msg: string) => `viber://forward?text=${encodeURIComponent(msg)}`;
 
   return (
-    <section ref={ref} style={{ background: "#0E0C09", padding: "6rem 1.5rem", textAlign: "center" }}>
+    <section ref={ref} className="mobile-section" style={{ background: "#0E0C09", padding: "6rem 1.5rem", textAlign: "center" }}>
       <motion.div
         initial={{ opacity: 0, y: 40 }}
         animate={inView ? { opacity: 1, y: 0 } : {}}
@@ -438,6 +442,7 @@ function RsvpSection() {
         <div style={{ display: "flex", flexDirection: "column", gap: "1rem", alignItems: "center" }}>
           <button
             onClick={() => setIntent("confirm")}
+            className="mobile-button"
             style={{
               background: "#C9952A", color: "#060606", border: "none", cursor: "pointer",
               padding: "1rem 3rem", fontSize: "0.75rem", letterSpacing: "0.25em", textTransform: "uppercase",
@@ -450,6 +455,7 @@ function RsvpSection() {
           </button>
           <button
             onClick={() => setIntent("decline")}
+            className="mobile-button"
             style={{
               background: "transparent", color: "#7A6E5A", border: "1px solid #3A3228", cursor: "pointer",
               padding: "1rem 3rem", fontSize: "0.75rem", letterSpacing: "0.25em", textTransform: "uppercase",
@@ -481,6 +487,7 @@ function RsvpSection() {
               animate={{ y: 0, opacity: 1 }}
               exit={{ y: 50, opacity: 0 }}
               onClick={(e) => e.stopPropagation()}
+              className="mobile-modal"
               style={{ background: "#0E0C09", border: "1px solid #3A3228", padding: "2.5rem", maxWidth: 420, width: "100%", textAlign: "center" }}
             >
               <p style={{ fontSize: "0.65rem", letterSpacing: "0.35em", textTransform: "uppercase", color: "#C9952A", marginBottom: "1rem" }}>
@@ -489,7 +496,7 @@ function RsvpSection() {
               <h3 style={{ fontFamily: "'Playfair Display', Georgia, serif", fontStyle: "italic", fontSize: "1.8rem", color: "#F5EBD8", marginBottom: "2rem" }}>
                 Otvori u
               </h3>
-              <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "1rem", marginBottom: "1.5rem" }}>
+              <div className="mobile-modal-grid" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "1rem", marginBottom: "1.5rem" }}>
                 <a
                   href={waLink(intent === "confirm" ? CONFIRM : DECLINE)}
                   target="_blank"

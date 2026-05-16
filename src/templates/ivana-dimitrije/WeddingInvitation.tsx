@@ -102,6 +102,10 @@ function MonogramSeal() {
 export default function WeddingInvitation() {
   const [isOpened, setIsOpened] = useState(false);
 
+  useEffect(() => {
+    if (isOpened) window.scrollTo({ top: 0, left: 0, behavior: "auto" });
+  }, [isOpened]);
+
   return (
     <main className="relative min-h-screen overflow-x-hidden pb-[env(safe-area-inset-bottom)]">
       {/* Decorative background leaves */}
