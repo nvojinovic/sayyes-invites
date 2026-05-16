@@ -1,6 +1,6 @@
 'use client';
 
-import { useRef, useEffect } from 'react';
+import { useRef, useEffect, useState } from 'react';
 import { motion, useScroll, useTransform, useReducedMotion } from 'framer-motion';
 
 export default function PhoneMockup() {
@@ -9,6 +9,11 @@ export default function PhoneMockup() {
   const screenTouchRef = useRef<HTMLDivElement>(null);
   const parallaxRef = useRef<HTMLDivElement>(null);
   const iframeScrollPreparedRef = useRef(false);
+  const [useNativeTouchScroll] = useState(
+    () =>
+      typeof window !== 'undefined' &&
+      window.matchMedia('(hover: none) and (pointer: coarse)').matches,
+  );
   const reduce = useReducedMotion();
 
   // Subtle scroll-linked parallax. As the hero scrolls past, the phone
@@ -105,19 +110,23 @@ export default function PhoneMockup() {
     };
 
     container.addEventListener('wheel', handleWheel, { passive: false });
-    screenTouchTarget.addEventListener('touchstart', handleTouchStart, { passive: true });
-    screenTouchTarget.addEventListener('touchmove', handleTouchMove, { passive: false });
-    screenTouchTarget.addEventListener('touchend', handleTouchEnd);
-    screenTouchTarget.addEventListener('touchcancel', handleTouchEnd);
+    if (!useNativeTouchScroll) {
+      screenTouchTarget.addEventListener('touchstart', handleTouchStart, { passive: true });
+      screenTouchTarget.addEventListener('touchmove', handleTouchMove, { passive: false });
+      screenTouchTarget.addEventListener('touchend', handleTouchEnd);
+      screenTouchTarget.addEventListener('touchcancel', handleTouchEnd);
+    }
 
     return () => {
       container.removeEventListener('wheel', handleWheel);
-      screenTouchTarget.removeEventListener('touchstart', handleTouchStart);
-      screenTouchTarget.removeEventListener('touchmove', handleTouchMove);
-      screenTouchTarget.removeEventListener('touchend', handleTouchEnd);
-      screenTouchTarget.removeEventListener('touchcancel', handleTouchEnd);
+      if (!useNativeTouchScroll) {
+        screenTouchTarget.removeEventListener('touchstart', handleTouchStart);
+        screenTouchTarget.removeEventListener('touchmove', handleTouchMove);
+        screenTouchTarget.removeEventListener('touchend', handleTouchEnd);
+        screenTouchTarget.removeEventListener('touchcancel', handleTouchEnd);
+      }
     };
-  }, []);
+  }, [useNativeTouchScroll]);
 
   return (
     <motion.div
@@ -148,14 +157,16 @@ export default function PhoneMockup() {
                 iframeScrollPreparedRef.current = false;
                 disableIframeSmoothScroll();
               }}
-              className="phone-iframe"
+              className={`phone-iframe ${useNativeTouchScroll ? 'phone-iframe-touch' : ''}`}
             />
-            <div
-              ref={screenTouchRef}
-              className="absolute inset-0 z-10 cursor-grab active:cursor-grabbing"
-              style={{ touchAction: 'none' }}
-              aria-hidden="true"
-            />
+            {!useNativeTouchScroll && (
+              <div
+                ref={screenTouchRef}
+                className="absolute inset-0 z-10 cursor-grab active:cursor-grabbing"
+                style={{ touchAction: 'none' }}
+                aria-hidden="true"
+              />
+            )}
           </div>
         </div>
 
