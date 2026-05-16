@@ -47,6 +47,15 @@ export default function TypefaceTemplate() {
   const [opened, setOpened] = useState(false);
 
   useEffect(() => {
+    document.body.style.background = opened ? "#0A0A0A" : "#FFFFFF";
+    document.body.style.color = opened ? "#FFFFFF" : "#0A0A0A";
+    return () => {
+      document.body.style.background = "";
+      document.body.style.color = "";
+    };
+  }, [opened]);
+
+  useEffect(() => {
     if (opened) window.scrollTo({ top: 0, left: 0, behavior: "auto" });
   }, [opened]);
 
