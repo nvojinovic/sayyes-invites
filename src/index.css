@@ -205,6 +205,9 @@
     transform-origin: top left;
     pointer-events: none;
   }
+  .phone-iframe-touch {
+    pointer-events: auto;
+  }
   @media (min-width: 640px) {
     .phone-iframe { transform: scale(0.713); }
   }
