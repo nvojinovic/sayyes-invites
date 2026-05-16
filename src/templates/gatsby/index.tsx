@@ -76,6 +76,15 @@ export default function GatsbyTemplate() {
   const [open, setOpen] = useState(false);
 
   useEffect(() => {
+    document.body.style.background = BLACK;
+    document.body.style.color = CREAM;
+    return () => {
+      document.body.style.background = "";
+      document.body.style.color = "";
+    };
+  }, []);
+
+  useEffect(() => {
     if (open) window.scrollTo({ top: 0, left: 0, behavior: "auto" });
   }, [open]);
 

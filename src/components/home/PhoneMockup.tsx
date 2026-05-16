@@ -32,6 +32,14 @@ export default function PhoneMockup() {
 
     let lastTouchY: number | null = null;
 
+    const getIframeScale = () => {
+      const iframe = iframeRef.current;
+      if (!iframe) return 1;
+
+      const rect = iframe.getBoundingClientRect();
+      return rect.width > 0 ? rect.width / iframe.offsetWidth : 1;
+    };
+
     const scrollIframeBy = (deltaY: number) => {
       const iframe = iframeRef.current;
       if (!iframe?.contentWindow) return false;
@@ -69,11 +77,13 @@ export default function PhoneMockup() {
       const currentY = e.touches[0]?.clientY;
       if (currentY === undefined || lastTouchY === null) return;
 
-      const deltaY = (lastTouchY - currentY) * 1.6;
+      const iframeScale = Math.max(0.35, getIframeScale());
+      const deltaY = ((lastTouchY - currentY) / iframeScale) * 1.35;
       lastTouchY = currentY;
 
-      e.preventDefault();
-      scrollIframeBy(deltaY);
+      if (scrollIframeBy(deltaY)) {
+        e.preventDefault();
+      }
     };
 
     const handleTouchEnd = () => {

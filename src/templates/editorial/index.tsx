@@ -28,6 +28,15 @@ export default function EditorialTemplate() {
   const [coverRead, setCoverRead] = useState(false);
 
   useEffect(() => {
+    document.body.style.background = "#FAF7F2";
+    document.body.style.color = "#1A1A1A";
+    return () => {
+      document.body.style.background = "";
+      document.body.style.color = "";
+    };
+  }, []);
+
+  useEffect(() => {
     if (coverRead) window.scrollTo({ top: 0, left: 0, behavior: "auto" });
   }, [coverRead]);
 

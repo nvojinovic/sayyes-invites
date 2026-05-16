@@ -100,6 +100,15 @@ export default function WatercolorTemplate() {
   const [opened, setOpened] = useState(false);
 
   useEffect(() => {
+    document.body.style.background = "#FEF9F7";
+    document.body.style.color = "rgba(80,50,80,0.85)";
+    return () => {
+      document.body.style.background = "";
+      document.body.style.color = "";
+    };
+  }, []);
+
+  useEffect(() => {
     if (opened) window.scrollTo({ top: 0, left: 0, behavior: "auto" });
   }, [opened]);
 

@@ -33,6 +33,15 @@ export default function BotanicalTemplate() {
   const [entered, setEntered] = useState(false);
 
   useEffect(() => {
+    document.body.style.background = FOREST_GREEN;
+    document.body.style.color = CREAM;
+    return () => {
+      document.body.style.background = "";
+      document.body.style.color = "";
+    };
+  }, []);
+
+  useEffect(() => {
     if (entered) window.scrollTo({ top: 0, left: 0, behavior: "auto" });
   }, [entered]);
 
