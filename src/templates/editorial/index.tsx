@@ -4,7 +4,7 @@
  * mixed typography scales, editorial photo framing.
  */
 
-import { useState, useRef } from "react";
+import { useEffect, useState, useRef } from "react";
 import { motion, AnimatePresence, useInView } from "framer-motion";
 import { MapPin, Check, X } from "lucide-react";
 
@@ -27,6 +27,10 @@ const RULE = "#D4C4B0";
 export default function EditorialTemplate() {
   const [coverRead, setCoverRead] = useState(false);
 
+  useEffect(() => {
+    if (coverRead) window.scrollTo({ top: 0, left: 0, behavior: "auto" });
+  }, [coverRead]);
+
   if (!coverRead) return <MagazineCover onOpen={() => setCoverRead(true)} />;
   return <Magazine />;
 }
@@ -36,6 +40,7 @@ export default function EditorialTemplate() {
 function MagazineCover({ onOpen }: { onOpen: () => void }) {
   return (
     <motion.div
+      className="template-page"
       initial={{ opacity: 1 }}
       exit={{ opacity: 0 }}
       style={{
@@ -47,7 +52,7 @@ function MagazineCover({ onOpen }: { onOpen: () => void }) {
       }}
     >
       {/* Masthead */}
-      <div style={{
+      <div className="mobile-sticky-header" style={{
         borderBottom: `1px solid ${RULE}`,
         padding: "1rem 2rem",
         display: "flex",
@@ -74,7 +79,7 @@ function MagazineCover({ onOpen }: { onOpen: () => void }) {
       </div>
 
       {/* Cover layout */}
-      <div style={{ flex: 1, display: "grid", gridTemplateColumns: "1fr 1.4fr", maxWidth: 900, margin: "0 auto", width: "100%", padding: "2rem" }}>
+      <div className="mobile-stack mobile-section-tight" style={{ flex: 1, display: "grid", gridTemplateColumns: "1fr 1.4fr", maxWidth: 900, margin: "0 auto", width: "100%", padding: "2rem" }}>
         {/* Left — cover text */}
         <div style={{ padding: "2rem 2rem 2rem 0", display: "flex", flexDirection: "column", justifyContent: "space-between" }}>
           <div>
@@ -166,6 +171,7 @@ function MagazineCover({ onOpen }: { onOpen: () => void }) {
         style={{ padding: "1.5rem", borderTop: `1px solid ${RULE}`, textAlign: "center" }}
       >
         <button
+          className="mobile-button"
           onClick={onOpen}
           style={{
             background: "#1A1A1A", color: "#FAF7F2",
@@ -190,10 +196,11 @@ function Magazine() {
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 0.6 }}
+      className="template-page"
       style={{ background: "#FAF7F2", fontFamily: "'Inter', sans-serif", minHeight: "100vh" }}
     >
       {/* Running header */}
-      <div style={{
+      <div className="mobile-sticky-header" style={{
         position: "sticky", top: 0, zIndex: 40,
         background: "#FAF7F2", borderBottom: `1px solid ${RULE}`,
         padding: "0.75rem 2rem",
@@ -227,7 +234,7 @@ function LetterSpread() {
   const inView = useInView(ref, { once: true, margin: "-80px" });
 
   return (
-    <section ref={ref} style={{ maxWidth: 1100, margin: "0 auto", padding: "5rem 2rem", display: "grid", gridTemplateColumns: "1fr 1px 1fr", gap: "3rem", alignItems: "start" }}>
+    <section ref={ref} className="mobile-stack mobile-section" style={{ maxWidth: 1100, margin: "0 auto", padding: "5rem 2rem", display: "grid", gridTemplateColumns: "1fr 1px 1fr", gap: "3rem", alignItems: "start" }}>
       {/* Left column — letter */}
       <motion.div
         initial={{ opacity: 0, y: 30 }}
@@ -268,7 +275,7 @@ function LetterSpread() {
       </motion.div>
 
       {/* Vertical rule */}
-      <div style={{ background: RULE, alignSelf: "stretch" }} />
+      <div className="mobile-hidden" style={{ background: RULE, alignSelf: "stretch" }} />
 
       {/* Right column — portrait */}
       <motion.div
@@ -293,7 +300,7 @@ function LetterSpread() {
           </div>
         </div>
         {/* Small editorial fact box */}
-        <div style={{ marginTop: "1.5rem", padding: "1rem", border: `1px solid ${RULE}`, borderLeft: `3px solid ${ACCENT}` }}>
+        <div className="mobile-card" style={{ marginTop: "1.5rem", padding: "1rem", border: `1px solid ${RULE}`, borderLeft: `3px solid ${ACCENT}` }}>
           <p style={{ fontSize: "0.6rem", letterSpacing: "0.25em", textTransform: "uppercase", color: ACCENT, marginBottom: "0.5rem" }}>Datum</p>
           <p style={{ fontSize: "1.1rem", color: "#1A1A1A" }}>Subota, 7. septembra 2025.</p>
         </div>
@@ -309,7 +316,7 @@ function PullQuoteSection() {
   const inView = useInView(ref, { once: true, margin: "-80px" });
 
   return (
-    <section ref={ref} style={{ background: "#1A1A1A", padding: "5rem 2rem", textAlign: "center" }}>
+    <section ref={ref} className="mobile-section" style={{ background: "#1A1A1A", padding: "5rem 2rem", textAlign: "center" }}>
       <motion.div
         initial={{ opacity: 0, scaleX: 0 }}
         animate={inView ? { opacity: 1, scaleX: 1 } : {}}
@@ -355,8 +362,8 @@ function ScheduleSpread() {
   const inView = useInView(ref, { once: true, margin: "-80px" });
 
   return (
-    <section ref={ref} style={{ maxWidth: 1100, margin: "0 auto", padding: "5rem 2rem" }}>
-      <div style={{ borderTop: `2px solid #1A1A1A`, paddingTop: "2rem", marginBottom: "3rem", display: "flex", justifyContent: "space-between", alignItems: "baseline" }}>
+    <section ref={ref} className="mobile-section" style={{ maxWidth: 1100, margin: "0 auto", padding: "5rem 2rem" }}>
+      <div className="mobile-row-stack" style={{ borderTop: `2px solid #1A1A1A`, paddingTop: "2rem", marginBottom: "3rem", display: "flex", justifyContent: "space-between", alignItems: "baseline" }}>
         <h2 style={{ fontFamily: "'Playfair Display', Georgia, serif", fontSize: "clamp(2rem, 4vw, 3.5rem)", color: "#1A1A1A", fontWeight: 400 }}>
           Program
         </h2>
@@ -365,7 +372,7 @@ function ScheduleSpread() {
         </span>
       </div>
 
-      <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))" }}>
+      <div className="mobile-stack-compact" style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))" }}>
         {scheduleItems.map((item, i) => (
           <motion.div
             key={item.label}
@@ -400,9 +407,9 @@ function LocationSpread() {
   const inView = useInView(ref, { once: true, margin: "-80px" });
 
   return (
-    <section ref={ref} style={{ background: "#F0EBE2", padding: "5rem 2rem" }}>
+    <section ref={ref} className="mobile-section" style={{ background: "#F0EBE2", padding: "5rem 2rem" }}>
       <div style={{ maxWidth: 1100, margin: "0 auto" }}>
-        <div style={{ display: "grid", gridTemplateColumns: "2fr 3fr", gap: "4rem", alignItems: "center" }}>
+        <div className="mobile-stack" style={{ display: "grid", gridTemplateColumns: "2fr 3fr", gap: "4rem", alignItems: "center" }}>
           <motion.div
             initial={{ opacity: 0, x: -30 }}
             animate={inView ? { opacity: 1, x: 0 } : {}}
@@ -447,7 +454,7 @@ function LocationSpread() {
               />
             </div>
             {/* Offset caption box */}
-            <div style={{
+            <div className="mobile-bleed-caption" style={{
               position: "absolute", bottom: "-1.5rem", right: "2rem",
               background: "#FAF7F2", padding: "1rem 1.5rem",
               border: `1px solid ${RULE}`,
@@ -474,7 +481,7 @@ function RsvpSpread() {
   const vbLink = (msg: string) => `viber://forward?text=${encodeURIComponent(msg)}`;
 
   return (
-    <section ref={ref} style={{ padding: "5rem 2rem", borderTop: `2px solid #1A1A1A` }}>
+    <section ref={ref} className="mobile-section" style={{ padding: "5rem 2rem", borderTop: `2px solid #1A1A1A` }}>
       <div style={{ maxWidth: 700, margin: "0 auto", textAlign: "center" }}>
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -494,6 +501,7 @@ function RsvpSpread() {
           <div style={{ display: "flex", gap: "1rem", justifyContent: "center", flexWrap: "wrap" }}>
             <button
               onClick={() => setIntent("confirm")}
+              className="mobile-button"
               style={{
                 background: "#1A1A1A", color: "#FAF7F2",
                 border: "none", cursor: "pointer",
@@ -508,6 +516,7 @@ function RsvpSpread() {
             </button>
             <button
               onClick={() => setIntent("decline")}
+              className="mobile-button"
               style={{
                 background: "transparent", color: "#1A1A1A",
                 border: `1px solid ${RULE}`, cursor: "pointer",
@@ -542,6 +551,7 @@ function RsvpSpread() {
               animate={{ y: 0, opacity: 1 }}
               exit={{ y: 40, opacity: 0 }}
               onClick={(e) => e.stopPropagation()}
+              className="mobile-modal"
               style={{
                 background: "#FAF7F2", padding: "3rem", maxWidth: 400, width: "100%",
                 textAlign: "center", border: `1px solid ${RULE}`,
@@ -553,7 +563,7 @@ function RsvpSpread() {
               <h3 style={{ fontFamily: "'Playfair Display', Georgia, serif", fontSize: "1.6rem", color: "#1A1A1A", marginBottom: "2rem" }}>
                 Otvori u aplikaciji
               </h3>
-              <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "1rem", marginBottom: "1.5rem" }}>
+              <div className="mobile-modal-grid" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "1rem", marginBottom: "1.5rem" }}>
                 <a href={waLink(intent === "confirm" ? CONFIRM : DECLINE)} target="_blank" rel="noopener noreferrer"
                   style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "0.75rem", padding: "1.5rem", border: `1px solid ${RULE}`, textDecoration: "none", color: "#1A1A1A" }}>
                   <span style={{ width: 44, height: 44, background: "#25D366", borderRadius: "50%", display: "grid", placeItems: "center" }}>

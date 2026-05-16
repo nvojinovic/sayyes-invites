@@ -108,6 +108,10 @@ export default function WeddingInvitation() {
   const [isOpened, setIsOpened] = useState(false);
 
   useEffect(() => {
+    if (isOpened) window.scrollTo({ top: 0, left: 0, behavior: "auto" });
+  }, [isOpened]);
+
+  useEffect(() => {
     // Auto-open for preview mode (phone mockup on homepage) with animation
     if (typeof window !== 'undefined') {
       const params = new URLSearchParams(window.location.search);

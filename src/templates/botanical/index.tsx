@@ -5,7 +5,7 @@
  * Vertical parallax sections. Leaf animations.
  */
 
-import { useState, useRef } from "react";
+import { useEffect, useState, useRef } from "react";
 import { motion, AnimatePresence, useScroll, useTransform, useInView } from "framer-motion";
 import { MapPin, Check, X, ChevronDown, Clock } from "lucide-react";
 
@@ -32,8 +32,12 @@ const CREAM_DIM = "rgba(245,237,216,0.7)";
 export default function BotanicalTemplate() {
   const [entered, setEntered] = useState(false);
 
+  useEffect(() => {
+    if (entered) window.scrollTo({ top: 0, left: 0, behavior: "auto" });
+  }, [entered]);
+
   return (
-    <div style={{ background: FOREST_GREEN }}>
+    <div className="template-page" style={{ background: FOREST_GREEN }}>
       <AnimatePresence mode="wait">
         {!entered ? (
           <ForestGate key="gate" onEnter={() => setEntered(true)} />
@@ -47,7 +51,7 @@ export default function BotanicalTemplate() {
 
 /* ─── Leaf SVG scattered around ─── */
 
-function FloatingLeaf({ style }: { style?: React.CSSProperties }) {
+function FloatingLeaf({ style, duration = 10 }: { style?: React.CSSProperties; duration?: number }) {
   return (
     <motion.svg
       viewBox="0 0 60 100"
@@ -58,7 +62,7 @@ function FloatingLeaf({ style }: { style?: React.CSSProperties }) {
         rotate: ["0deg", "5deg", "-3deg", "0deg"],
         y: [0, -15, 5, 0],
       }}
-      transition={{ duration: 8 + Math.random() * 6, repeat: Infinity, ease: "easeInOut" }}
+      transition={{ duration, repeat: Infinity, ease: "easeInOut" }}
     >
       <path d="M30 5 C 30 30, 30 70, 30 95" stroke="rgba(160,200,150,0.6)" strokeWidth="1.5" strokeLinecap="round" fill="none" />
       {[15, 30, 48, 65, 80].map((y, i) => (
@@ -92,10 +96,10 @@ function ForestGate({ onEnter }: { onEnter: () => void }) {
       </div>
 
       {/* Scattered leaves */}
-      <FloatingLeaf style={{ top: "5%", left: "2%", width: 40, height: 70, opacity: 0.5, transform: "rotate(-30deg)" }} />
-      <FloatingLeaf style={{ top: "10%", right: "3%", width: 50, height: 85, opacity: 0.4, transform: "rotate(20deg) scaleX(-1)" }} />
-      <FloatingLeaf style={{ bottom: "15%", left: "5%", width: 35, height: 60, opacity: 0.4, transform: "rotate(10deg)" }} />
-      <FloatingLeaf style={{ bottom: "10%", right: "6%", width: 45, height: 75, opacity: 0.35, transform: "rotate(-15deg) scaleX(-1)" }} />
+      <FloatingLeaf duration={10} style={{ top: "5%", left: "2%", width: 40, height: 70, opacity: 0.5, transform: "rotate(-30deg)" }} />
+      <FloatingLeaf duration={13} style={{ top: "10%", right: "3%", width: 50, height: 85, opacity: 0.4, transform: "rotate(20deg) scaleX(-1)" }} />
+      <FloatingLeaf duration={12} style={{ bottom: "15%", left: "5%", width: 35, height: 60, opacity: 0.4, transform: "rotate(10deg)" }} />
+      <FloatingLeaf duration={14} style={{ bottom: "10%", right: "6%", width: 45, height: 75, opacity: 0.35, transform: "rotate(-15deg) scaleX(-1)" }} />
 
       <div style={{ position: "relative", zIndex: 10, textAlign: "center", padding: "2rem" }}>
         <motion.p
@@ -180,6 +184,7 @@ function ForestGate({ onEnter }: { onEnter: () => void }) {
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 2 }}
           onClick={onEnter}
+          className="mobile-button"
           style={{
             background: "rgba(196,163,85,0.15)",
             backdropFilter: "blur(10px)",
@@ -235,7 +240,7 @@ function ParallaxSection({ img, height, children }: { img: string; height: strin
   const y = useTransform(scrollYProgress, [0, 1], ["-15%", "15%"]);
 
   return (
-    <section ref={ref} style={{ position: "relative", height, overflow: "hidden", display: "flex", alignItems: "center", justifyContent: "center" }}>
+    <section ref={ref} className="mobile-parallax-section" style={{ position: "relative", height, overflow: "hidden", display: "flex", alignItems: "center", justifyContent: "center" }}>
       <motion.div style={{ y, position: "absolute", inset: "-20%", zIndex: 0 }}>
         <img src={img} alt="" style={{ width: "100%", height: "100%", objectFit: "cover" }} />
       </motion.div>
@@ -279,7 +284,7 @@ function ScheduleSection() {
   const inView = useInView(ref, { once: true, margin: "-80px" });
 
   return (
-    <section ref={ref} style={{ background: FOREST_GREEN, padding: "5rem 1.5rem" }}>
+    <section ref={ref} className="mobile-section" style={{ background: FOREST_GREEN, padding: "5rem 1.5rem" }}>
       <motion.p
         initial={{ opacity: 0 }} animate={inView ? { opacity: 1 } : {}}
         style={{ textAlign: "center", fontSize: "0.6rem", letterSpacing: "0.45em", textTransform: "uppercase", color: GOLD, marginBottom: "0.5rem" }}
@@ -295,7 +300,7 @@ function ScheduleSection() {
 
       <div style={{ maxWidth: 700, margin: "0 auto", position: "relative" }}>
         {/* Vertical line */}
-        <div style={{ position: "absolute", left: "2rem", top: 0, bottom: 0, width: 1, background: `linear-gradient(to bottom, transparent, ${LEAF}, transparent)` }} />
+        <div className="mobile-schedule-line" style={{ position: "absolute", left: "2rem", top: 0, bottom: 0, width: 1, background: `linear-gradient(to bottom, transparent, ${LEAF}, transparent)` }} />
 
         <div style={{ display: "flex", flexDirection: "column", gap: "0" }}>
           {schedule.map((item, i) => (
@@ -304,10 +309,11 @@ function ScheduleSection() {
               initial={{ opacity: 0, x: -30 }}
               animate={inView ? { opacity: 1, x: 0 } : {}}
               transition={{ delay: 0.1 + i * 0.12, duration: 0.7 }}
+              className="mobile-schedule-item"
               style={{ display: "flex", gap: "2.5rem", padding: "1.5rem 0 1.5rem 5rem", position: "relative" }}
             >
               {/* Node */}
-              <div style={{
+              <div className="mobile-schedule-node" style={{
                 position: "absolute", left: "calc(2rem - 6px)", top: "50%", transform: "translateY(-50%)",
                 width: 13, height: 13,
                 borderRadius: "50%",
@@ -341,13 +347,14 @@ function ScheduleSection() {
 
 function LocationOverlay() {
   return (
-    <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "1.5rem" }}>
+    <div className="mobile-location-overlay" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "1.5rem" }}>
       {[
         { label: "Manastir Krušedol", desc: "Ceremonija · 11:00", map: "https://www.google.com/maps/search/?api=1&query=Manastir+Kruseol+Fruska+Gora" },
         { label: "Etno restoran Fruška", desc: "Proslava · 13:00", map: "https://www.google.com/maps/search/?api=1&query=Fruska+Gora+etno+restoran" },
       ].map((loc) => (
         <div
           key={loc.label}
+          className="mobile-card"
           style={{
             background: "rgba(28,58,42,0.7)",
             backdropFilter: "blur(12px)",
@@ -391,6 +398,7 @@ function RsvpOverlay() {
       <div style={{ display: "flex", flexDirection: "column", gap: "0.8rem", alignItems: "center" }}>
         <button
           onClick={() => setIntent("confirm")}
+          className="mobile-button"
           style={{
             background: GOLD, color: FOREST_GREEN, border: "none", cursor: "pointer",
             padding: "1rem 2.5rem", fontSize: "0.75rem", letterSpacing: "0.25em", textTransform: "uppercase",
@@ -402,6 +410,7 @@ function RsvpOverlay() {
         </button>
         <button
           onClick={() => setIntent("decline")}
+          className="mobile-button"
           style={{
             background: "rgba(28,58,42,0.6)", backdropFilter: "blur(8px)",
             border: `1px solid ${GOLD}44`, color: CREAM_DIM, cursor: "pointer",
@@ -424,11 +433,12 @@ function RsvpOverlay() {
             <motion.div
               initial={{ y: 40, opacity: 0 }} animate={{ y: 0, opacity: 1 }} exit={{ y: 40, opacity: 0 }}
               onClick={(e) => e.stopPropagation()}
+              className="mobile-modal"
               style={{ background: FOREST_GREEN, border: `1px solid ${GOLD}44`, padding: "2.5rem", maxWidth: 380, width: "100%", textAlign: "center" }}
             >
               <p style={{ fontSize: "0.6rem", letterSpacing: "0.4em", textTransform: "uppercase", color: GOLD, marginBottom: "0.5rem" }}>Pošalji poruku</p>
               <h3 style={{ fontFamily: "'Playfair Display', Georgia, serif", fontStyle: "italic", fontSize: "1.6rem", color: CREAM, marginBottom: "2rem", fontWeight: 400 }}>Otvori u</h3>
-              <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "1rem", marginBottom: "1.5rem" }}>
+              <div className="mobile-modal-grid" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "1rem", marginBottom: "1.5rem" }}>
                 <a href={waLink(intent === "confirm" ? CONFIRM : DECLINE)} target="_blank" rel="noopener noreferrer"
                   style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "0.75rem", padding: "1.5rem", border: `1px solid ${LEAF}`, textDecoration: "none", color: CREAM }}>
                   <span style={{ width: 44, height: 44, background: "#25D366", borderRadius: "50%", display: "grid", placeItems: "center" }}><WhatsAppIcon /></span>

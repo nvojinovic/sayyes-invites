@@ -5,7 +5,7 @@
  * No hard edges anywhere. Everything floats.
  */
 
-import { useState, useRef } from "react";
+import { useEffect, useState, useRef } from "react";
 import { motion, AnimatePresence, useInView } from "framer-motion";
 import { Heart, MapPin, Clock, Check, X, ChevronDown } from "lucide-react";
 
@@ -99,8 +99,12 @@ function BlobBackground() {
 export default function WatercolorTemplate() {
   const [opened, setOpened] = useState(false);
 
+  useEffect(() => {
+    if (opened) window.scrollTo({ top: 0, left: 0, behavior: "auto" });
+  }, [opened]);
+
   return (
-    <div style={{ background: "#FEF9F7", minHeight: "100vh", position: "relative" }}>
+    <div className="template-page" style={{ background: "#FEF9F7", minHeight: "100vh", position: "relative" }}>
       <BlobBackground />
       <div style={{ position: "relative", zIndex: 1 }}>
         <AnimatePresence mode="wait">
@@ -294,6 +298,7 @@ function FloatingCard({ children, delay = 0, tilt = 0 }: { children: React.React
         boxShadow: "0 20px 60px -10px rgba(160,100,140,0.18), 0 4px 20px rgba(255,255,255,0.8) inset",
         padding: "2.5rem",
       }}
+      className="watercolor-card mobile-card"
     >
       {children}
     </motion.div>
@@ -304,7 +309,7 @@ function FloatingCard({ children, delay = 0, tilt = 0 }: { children: React.React
 
 function HeroSection() {
   return (
-    <section style={{ minHeight: "100vh", display: "flex", alignItems: "center", justifyContent: "center", padding: "4rem 1.5rem", textAlign: "center" }}>
+    <section className="mobile-section" style={{ minHeight: "100vh", display: "flex", alignItems: "center", justifyContent: "center", padding: "4rem 1.5rem", textAlign: "center" }}>
       <div style={{ maxWidth: 600 }}>
         <motion.div
           initial={{ opacity: 0, scale: 0.8 }}
@@ -375,7 +380,7 @@ function HeroSection() {
 
 function LetterSection() {
   return (
-    <section style={{ padding: "4rem 1.5rem" }}>
+    <section className="mobile-section-tight" style={{ padding: "4rem 1.5rem" }}>
       <div style={{ maxWidth: 650, margin: "0 auto" }}>
         <FloatingCard tilt={-1}>
           <p style={{ textAlign: "center", fontFamily: "'Playfair Display', Georgia, serif", fontStyle: "italic", fontSize: "1.6rem", color: "rgba(80,50,80,0.85)", marginBottom: "1.5rem" }}>
@@ -408,7 +413,7 @@ const schedule = [
 
 function ScheduleSection() {
   return (
-    <section style={{ padding: "4rem 1.5rem" }}>
+    <section className="mobile-section-tight" style={{ padding: "4rem 1.5rem" }}>
       <div style={{ maxWidth: 750, margin: "0 auto" }}>
         <FloatingCard tilt={0.5}>
           <p style={{ textAlign: "center", fontSize: "0.6rem", letterSpacing: "0.4em", textTransform: "uppercase", color: "rgba(150,100,130,0.7)", marginBottom: "0.5rem" }}>
@@ -422,7 +427,8 @@ function ScheduleSection() {
             {schedule.map((item, i) => (
               <div
                 key={item.title}
-                style={{
+                  className="mobile-row-stack"
+                  style={{
                   display: "flex", alignItems: "center", gap: "1.5rem",
                   padding: "1.25rem 0",
                   borderTop: i > 0 ? "1px solid rgba(210,160,190,0.2)" : "none",
@@ -460,8 +466,8 @@ function ScheduleSection() {
 
 function LocationSection() {
   return (
-    <section style={{ padding: "4rem 1.5rem" }}>
-      <div style={{ maxWidth: 750, margin: "0 auto", display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))", gap: "1.5rem" }}>
+    <section className="mobile-section-tight" style={{ padding: "4rem 1.5rem" }}>
+      <div className="mobile-stack" style={{ maxWidth: 750, margin: "0 auto", display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))", gap: "1.5rem" }}>
         {[
           { label: "Crkva Sv. Petke", desc: "Ceremonija", time: "11:00", tilt: -1.5, color: "rgba(230,170,170,0.35)", map: "https://www.google.com/maps/search/?api=1&query=Crkva+Sv+Petke+Beograd" },
           { label: "Vila Mala", desc: "Proslava", time: "13:00", tilt: 1, color: "rgba(190,170,230,0.35)", map: "https://www.google.com/maps/search/?api=1&query=Vila+Beograd" },
@@ -492,7 +498,7 @@ function RsvpSection() {
   const vbLink = (msg: string) => `viber://forward?text=${encodeURIComponent(msg)}`;
 
   return (
-    <section style={{ padding: "4rem 1.5rem 6rem" }}>
+    <section className="mobile-section" style={{ padding: "4rem 1.5rem 6rem" }}>
       <div style={{ maxWidth: 600, margin: "0 auto" }}>
         <FloatingCard tilt={-0.5}>
           <p style={{ textAlign: "center", fontSize: "0.6rem", letterSpacing: "0.4em", textTransform: "uppercase", color: "rgba(150,100,130,0.7)", marginBottom: "0.5rem" }}>
@@ -508,6 +514,7 @@ function RsvpSection() {
           <div style={{ display: "flex", flexDirection: "column", gap: "0.8rem", alignItems: "center" }}>
             <button
               onClick={() => setIntent("confirm")}
+              className="mobile-button"
               style={{
                 width: "100%", maxWidth: 320,
                 background: "linear-gradient(135deg, rgba(210,160,180,0.7), rgba(190,160,220,0.7))",
@@ -524,6 +531,7 @@ function RsvpSection() {
             </button>
             <button
               onClick={() => setIntent("decline")}
+              className="mobile-button"
               style={{
                 background: "transparent",
                 border: "1px solid rgba(200,170,190,0.4)",
@@ -550,11 +558,12 @@ function RsvpSection() {
             <motion.div
               initial={{ y: 40, scale: 0.95 }} animate={{ y: 0, scale: 1 }} exit={{ y: 40, opacity: 0 }}
               onClick={(e) => e.stopPropagation()}
+              className="mobile-modal"
               style={{ background: "rgba(255,250,255,0.85)", backdropFilter: "blur(20px)", borderRadius: "24px", border: "1px solid rgba(255,255,255,0.9)", boxShadow: "0 30px 80px rgba(150,80,130,0.25)", padding: "2.5rem", maxWidth: 380, width: "100%", textAlign: "center" }}
             >
               <p style={{ fontSize: "0.6rem", letterSpacing: "0.35em", textTransform: "uppercase", color: "rgba(150,100,130,0.7)", marginBottom: "0.5rem" }}>Pošalji poruku</p>
               <h3 style={{ fontFamily: "'Playfair Display', Georgia, serif", fontStyle: "italic", fontSize: "1.6rem", color: "rgba(80,50,80,0.85)", marginBottom: "2rem" }}>Otvori u</h3>
-              <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "1rem", marginBottom: "1.5rem" }}>
+              <div className="mobile-modal-grid" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "1rem", marginBottom: "1.5rem" }}>
                 <a href={waLink(intent === "confirm" ? CONFIRM : DECLINE)} target="_blank" rel="noopener noreferrer"
                   style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "0.75rem", padding: "1.25rem", borderRadius: "16px", border: "1px solid rgba(200,180,210,0.4)", textDecoration: "none", color: "rgba(80,50,80,0.85)", background: "rgba(255,255,255,0.6)" }}>
                   <span style={{ width: 44, height: 44, background: "#25D366", borderRadius: "50%", display: "grid", placeItems: "center" }}><WhatsAppIcon /></span>

@@ -4,7 +4,7 @@
  * Symmetrical, opulent, formal.
  */
 
-import { useState, useRef } from "react";
+import { useEffect, useState, useRef } from "react";
 import { motion, AnimatePresence, useInView } from "framer-motion";
 import { Check, X, MapPin, Clock } from "lucide-react";
 
@@ -25,7 +25,7 @@ type Intent = "confirm" | "decline";
 
 function ArtDecoFrame({ children, style }: { children: React.ReactNode; style?: React.CSSProperties }) {
   return (
-    <div style={{ position: "relative", ...style }}>
+    <div className="mobile-art-frame" style={{ position: "relative", ...style }}>
       {/* Corner ornaments */}
       {[
         { top: 0, left: 0, transform: "none" },
@@ -75,8 +75,12 @@ function DecoDivider() {
 export default function GatsbyTemplate() {
   const [open, setOpen] = useState(false);
 
+  useEffect(() => {
+    if (open) window.scrollTo({ top: 0, left: 0, behavior: "auto" });
+  }, [open]);
+
   return (
-    <div style={{ background: BLACK, color: CREAM, minHeight: "100vh", fontFamily: "'Inter', system-ui, sans-serif" }}>
+    <div className="template-page" style={{ background: BLACK, color: CREAM, minHeight: "100vh", fontFamily: "'Inter', system-ui, sans-serif" }}>
       <AnimatePresence>
         {!open && <CurtainIntro key="curtain" onOpen={() => setOpen(true)} />}
       </AnimatePresence>
@@ -183,6 +187,7 @@ function CurtainIntro({ onOpen }: { onOpen: () => void }) {
           <DecoDivider />
 
           <button
+            className="mobile-button"
             onClick={handleOpen}
             style={{
               background: "none", border: `1px solid ${GOLD}`, color: GOLD, cursor: "pointer",
@@ -203,7 +208,7 @@ function CurtainIntro({ onOpen }: { onOpen: () => void }) {
 
 function GatsbyHero() {
   return (
-    <section style={{ minHeight: "100vh", display: "flex", alignItems: "center", justifyContent: "center", position: "relative", padding: "4rem 2rem", textAlign: "center" }}>
+    <section className="mobile-section" style={{ minHeight: "100vh", display: "flex", alignItems: "center", justifyContent: "center", position: "relative", padding: "4rem 2rem", textAlign: "center" }}>
       {/* Background deco pattern */}
       <div style={{
         position: "absolute", inset: 0,
@@ -280,7 +285,7 @@ function LetterSection() {
   const inView = useInView(ref, { once: true, margin: "-80px" });
 
   return (
-    <section ref={ref} style={{ background: DARK, padding: "5rem 2rem" }}>
+    <section ref={ref} className="mobile-section" style={{ background: DARK, padding: "5rem 2rem" }}>
       <motion.div
         initial={{ opacity: 0, y: 40 }}
         animate={inView ? { opacity: 1, y: 0 } : {}}
@@ -321,7 +326,7 @@ function TimelineSection() {
   const inView = useInView(ref, { once: true, margin: "-80px" });
 
   return (
-    <section ref={ref} style={{ padding: "5rem 2rem", textAlign: "center" }}>
+    <section ref={ref} className="mobile-section" style={{ padding: "5rem 2rem", textAlign: "center" }}>
       <motion.p
         initial={{ opacity: 0 }}
         animate={inView ? { opacity: 1 } : {}}
@@ -338,7 +343,7 @@ function TimelineSection() {
         Tok dana
       </motion.h2>
 
-      <div style={{ maxWidth: 900, margin: "0 auto", display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(240px, 1fr))", gap: "1px", background: GOLD_DIM }}>
+      <div className="mobile-stack-compact" style={{ maxWidth: 900, margin: "0 auto", display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(240px, 1fr))", gap: "1px", background: GOLD_DIM }}>
         {events.map((ev, i) => (
           <motion.div
             key={ev.num}
@@ -381,7 +386,7 @@ function LocationSection() {
   const inView = useInView(ref, { once: true, margin: "-80px" });
 
   return (
-    <section ref={ref} style={{ background: DARK, padding: "5rem 2rem" }}>
+    <section ref={ref} className="mobile-section" style={{ background: DARK, padding: "5rem 2rem" }}>
       <motion.div
         initial={{ opacity: 0, y: 40 }}
         animate={inView ? { opacity: 1, y: 0 } : {}}
@@ -393,14 +398,14 @@ function LocationSection() {
             Mesta proslave
           </p>
           <DecoDivider />
-          <div style={{ display: "grid", gridTemplateColumns: "1fr 1px 1fr", gap: "2rem", marginTop: "1.5rem" }}>
+          <div className="mobile-stack" style={{ display: "grid", gridTemplateColumns: "1fr 1px 1fr", gap: "2rem", marginTop: "1.5rem" }}>
             {[
               { label: "Crkva Uspenja", time: "14:00", place: "Bulevar Oslobođenja, Beograd" },
               { label: "Grand Hyatt", time: "16:00", place: "Rančićeva 10, Beograd" },
             ].map((loc, i) => (
               i === 1 ? (
                 <>
-                  <div key="rule" style={{ background: GOLD_DIM }} />
+                  <div key="rule" className="mobile-hidden" style={{ background: GOLD_DIM }} />
                   <div key={loc.label} style={{ textAlign: "center" }}>
                     <p style={{ fontSize: "0.6rem", letterSpacing: "0.3em", textTransform: "uppercase", color: GOLD, marginBottom: "0.6rem" }}>{loc.time}</p>
                     <h3 style={{ fontFamily: "'Playfair Display', Georgia, serif", fontSize: "1.3rem", color: CREAM, fontWeight: 400, marginBottom: "0.5rem" }}>{loc.label}</h3>
@@ -443,7 +448,7 @@ function GatsbyRsvp() {
   const vbLink = (msg: string) => `viber://forward?text=${encodeURIComponent(msg)}`;
 
   return (
-    <section ref={ref} style={{ padding: "5rem 2rem", textAlign: "center" }}>
+    <section ref={ref} className="mobile-section" style={{ padding: "5rem 2rem", textAlign: "center" }}>
       <motion.div
         initial={{ opacity: 0, y: 30 }}
         animate={inView ? { opacity: 1, y: 0 } : {}}
@@ -461,6 +466,7 @@ function GatsbyRsvp() {
           </p>
           <div style={{ display: "flex", flexDirection: "column", gap: "1rem", alignItems: "center" }}>
             <button
+              className="mobile-button"
               onClick={() => setIntent("confirm")}
               style={{
                 background: GOLD, color: BLACK, border: "none", cursor: "pointer",
@@ -472,6 +478,7 @@ function GatsbyRsvp() {
               <Check style={{ width: 15, height: 15 }} /> Potvrđujem dolazak
             </button>
             <button
+              className="mobile-button"
               onClick={() => setIntent("decline")}
               style={{
                 background: "transparent", color: GOLD_DIM, border: `1px solid ${GOLD_DIM}`, cursor: "pointer",
@@ -496,12 +503,13 @@ function GatsbyRsvp() {
             <motion.div
               initial={{ scale: 0.9, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} exit={{ scale: 0.9, opacity: 0 }}
               onClick={(e) => e.stopPropagation()}
+              className="mobile-modal"
               style={{ background: DARK, maxWidth: 400, width: "100%", position: "relative" }}
             >
               <ArtDecoFrame>
                 <p style={{ textAlign: "center", fontSize: "0.6rem", letterSpacing: "0.4em", textTransform: "uppercase", color: GOLD, marginBottom: "0.5rem" }}>Pošalji poruku</p>
                 <h3 style={{ textAlign: "center", fontFamily: "'Playfair Display', Georgia, serif", fontSize: "1.6rem", color: CREAM, fontWeight: 400, marginBottom: "2rem" }}>Otvori u</h3>
-                <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "1px", background: GOLD_DIM, marginBottom: "1.5rem" }}>
+                <div className="mobile-modal-grid" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "1px", background: GOLD_DIM, marginBottom: "1.5rem" }}>
                   <a href={waLink(intent === "confirm" ? CONFIRM : DECLINE)} target="_blank" rel="noopener noreferrer"
                     style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "0.75rem", padding: "1.5rem", background: DARK, textDecoration: "none", color: CREAM }}>
                     <span style={{ width: 44, height: 44, background: "#25D366", borderRadius: "50%", display: "grid", placeItems: "center" }}>
